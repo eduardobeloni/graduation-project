@@ -1,5 +1,9 @@
-mono.log
-mono.aux
-mono.bbl
-mono.pdf
-
+*.log
+*.aux
+*.bbl
+*.pdf
+*.toc
+*.blg
+*.lot
+*.lol
+*.lof
