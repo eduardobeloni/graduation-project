@@ -1,0 +1,8 @@
+This is my graduation project, which dates from July 2009.
+Unfortunately it has been written in Portuguese.
+
+To compile it, just type make:
+$ make
+
+You can clean the repository:
+$ make clean
