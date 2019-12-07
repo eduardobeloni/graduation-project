@@ -28,15 +28,15 @@ showstringspaces=false
 tabsize=1
 }
 
-\title{Gerenciamento autom·tico de memÛria paralelo para uma linguagem funcional pura}
+\title{Gerenciamento autom√°tico de mem√≥ria paralelo para uma linguagem funcional pura}
 
 \author{Beloni}{Eduardo Fiss}
-\advisor[Prof.~Dr.]{Du Bois}{AndrÈ Rauber}
+\advisor[Prof.~Dr.]{Du Bois}{Andr√© Rauber}
 
 \keyword{coleta de lixo}
 \keyword{multicore}
 \keyword{{\it threads}}
-\keyword{sistema de execuÁ„o}
+\keyword{sistema de execu√ß√£o}
 
 
 \begin{document}
@@ -51,12 +51,12 @@ tabsize=1
 %\begin{dedicatoria}
 %Dedico a todos aqueles, 
 %colegas, professores e familiares
-%que, com seu trabalho e persistÍncia, me deram grandes exemplos, dos quais jamais esquecerei. %Hoje sei que a vontade de acertar deve ser maior que o medo de errar.
+%que, com seu trabalho e persist√™ncia, me deram grandes exemplos, dos quais jamais esquecerei. %Hoje sei que a vontade de acertar deve ser maior que o medo de errar.
 %\end{dedicatoria}
 
 %Opcional
 \begin{agradecimentos}
-Primeiramente, devo agradecer ao Prof. Ricardo Andrade Cava, que me foi de grande ajuda e incentivo ao inÌcio do curso. TambÈm gostaria de prestar meus agradecimentos ao Prof. Marilton Sanchotene de Aguiar, por ter me concedido a oportunidade de pesquisa remunerada sobre autÙmatos celulares durante dois anos; ao Prof. AndrÈ Rauber Du Bois, por mais dois anos de pesquisa remunerada e por sua orientaÁ„o neste projeto. Por fim, agradeÁo ao Prof. Adenauer CorrÍa Yamin, que sempre esteve a disposiÁ„o para prestar esclarecimentos.
+Primeiramente, devo agradecer ao Prof. Ricardo Andrade Cava, que me foi de grande ajuda e incentivo ao in√≠cio do curso. Tamb√©m gostaria de prestar meus agradecimentos ao Prof. Marilton Sanchotene de Aguiar, por ter me concedido a oportunidade de pesquisa remunerada sobre aut√¥matos celulares durante dois anos; ao Prof. Andr√© Rauber Du Bois, por mais dois anos de pesquisa remunerada e por sua orienta√ß√£o neste projeto. Por fim, agrade√ßo ao Prof. Adenauer Corr√™a Yamin, que sempre esteve a disposi√ß√£o para prestar esclarecimentos.
 \end{agradecimentos}
 
 %Opcional
@@ -96,22 +96,22 @@ It does not do to dwell on dreams and forget to live, remember that.\\
 %        \item[NUMA] Non-Uniform Memory Access
 %        \item[SIMD] Single Instruction Multiple Data
 %        \item[SPMD] Single Program Multiple Data
-%        \item[ABNT] AssociaÁ„o Brasileira de Normas TÈcnicas
+%        \item[ABNT] Associa√ß√£o Brasileira de Normas T√©cnicas
 %\end{listofabbrv}
 
 %Resumo em Portugues (no maximo 250 palavras)
 \begin{abstract}
-Muitas linguagens de programaÁ„o modernas (explÌcita ou implicitamente) disponibilizam ao programador rotinas para alocaÁ„o din‚mica de blocos de memÛria, enquanto que o processo de liberaÁ„o da memÛria utilizada È gerenciado automaticamente pelo sistema de execuÁ„o (\textit{runtime system}) da linguagem \cite{bib:lins:gc}. Este processo È chamado \textbf{coleta de lixo} (\textit{garbage collection}): liberaÁ„o autom·tica de memÛria alocada dinamicamente.
+Muitas linguagens de programa√ß√£o modernas (expl√≠cita ou implicitamente) disponibilizam ao programador rotinas para aloca√ß√£o din√¢mica de blocos de mem√≥ria, enquanto que o processo de libera√ß√£o da mem√≥ria utilizada √© gerenciado automaticamente pelo sistema de execu√ß√£o (\textit{runtime system}) da linguagem \cite{bib:lins:gc}. Este processo √© chamado \textbf{coleta de lixo} (\textit{garbage collection}): libera√ß√£o autom√°tica de mem√≥ria alocada dinamicamente.
 
-Coleta de lixo deve ser utilizada em linguagens de programaÁ„o funcionais, pois o foco est· na definiÁ„o do comportamento das funÁıes, ou seja, o quÍ a funÁ„o deve fazer, n„o como esta o faz. A linguagem funcional pura \texttt{pFun} -- em desenvolvimento no grupo G3PD -- possui algumas estratÈgias \textit{stop-the-world} de coleta de lixo implementadas para sistemas monoprocessados, s„o elas: coleta de cÛpia de dois espaÁos \cite{bib:dubois:pfun} e coleta baseada em geraÁıes utilizando o algoritmo \textit{mark-and-compact} para coleta da geraÁ„o antiga \cite{bib:beloni}.
+Coleta de lixo deve ser utilizada em linguagens de programa√ß√£o funcionais, pois o foco est√° na defini√ß√£o do comportamento das fun√ß√µes, ou seja, o qu√™ a fun√ß√£o deve fazer, n√£o como esta o faz. A linguagem funcional pura \texttt{pFun} -- em desenvolvimento no grupo G3PD -- possui algumas estrat√©gias \textit{stop-the-world} de coleta de lixo implementadas para sistemas monoprocessados, s√£o elas: coleta de c√≥pia de dois espa√ßos \cite{bib:dubois:pfun} e coleta baseada em gera√ß√µes utilizando o algoritmo \textit{mark-and-compact} para coleta da gera√ß√£o antiga \cite{bib:beloni}.
 
-%Para que programas \texttt{pFun} possam tirar proveito das arquiteturas \textit{multicore}, cada vez mais acessÌveis no mercado, este projeto visa a paralelizaÁ„o de uma estratÈgia de coleta de lixo, a ser escolhida considerando sua viabilidade e benefÌcios em relaÁ„o ‡s implementaÁıes sequenciais. Tem-se por objetivo diminuir o gargalo da coleta de lixo e, por consequÍncia, reduzir o tempo total de execuÁ„o de programas na m·quina virtual \texttt{pFun}.
+%Para que programas \texttt{pFun} possam tirar proveito das arquiteturas \textit{multicore}, cada vez mais acess√≠veis no mercado, este projeto visa a paraleliza√ß√£o de uma estrat√©gia de coleta de lixo, a ser escolhida considerando sua viabilidade e benef√≠cios em rela√ß√£o √†s implementa√ß√µes sequenciais. Tem-se por objetivo diminuir o gargalo da coleta de lixo e, por consequ√™ncia, reduzir o tempo total de execu√ß√£o de programas na m√°quina virtual \texttt{pFun}.
 
-Devido ‡ inevit·vel barreira fÌsica, a evoluÁ„o tecnolÛgica, que antes consistia de aumentar a velocidade dos processadores, agora tende a acrescentar mais unidades de processamento ‡ CPU, dando origem aos processadores  multicore. Consequentemente, avanÁos na tecnologia aumentam a possibilidade de paralelismo das aplicaÁıes, e saber explor·-lo È um dos desafios em CiÍncia da ComputaÁ„o.
+Devido √† inevit√°vel barreira f√≠sica, a evolu√ß√£o tecnol√≥gica, que antes consistia de aumentar a velocidade dos processadores, agora tende a acrescentar mais unidades de processamento √† CPU, dando origem aos processadores  multicore. Consequentemente, avan√ßos na tecnologia aumentam a possibilidade de paralelismo das aplica√ß√µes, e saber explor√°-lo √© um dos desafios em Ci√™ncia da Computa√ß√£o.
 
-Com intuito de explorar as potencialidades e limites das arquiteturas multicore, o presente projeto propıe uma implementaÁ„o paralela da coleta de cÛpia de dois espaÁos, baseada na estrutura apresentada por Flood e Detlefs \cite{bib:flood:pargc}.
+Com intuito de explorar as potencialidades e limites das arquiteturas multicore, o presente projeto prop√µe uma implementa√ß√£o paralela da coleta de c√≥pia de dois espa√ßos, baseada na estrutura apresentada por Flood e Detlefs \cite{bib:flood:pargc}.
 
-%O algoritmo de coleta de lixo paralelo foi implementado na linguagem C, utilizando a API POSIX {\it threads}, de modo a manter a integraÁ„o com a linguagem \texttt{pFun}, alÈm de colaborar no desenvolvimento desta. %Por fim, os tempos de execuÁ„o produzidos pelas implementaÁıes paralela e sequencial dos algoritmos foram comparados.
+%O algoritmo de coleta de lixo paralelo foi implementado na linguagem C, utilizando a API POSIX {\it threads}, de modo a manter a integra√ß√£o com a linguagem \texttt{pFun}, al√©m de colaborar no desenvolvimento desta. %Por fim, os tempos de execu√ß√£o produzidos pelas implementa√ß√µes paralela e sequencial dos algoritmos foram comparados.
 
 \end{abstract}
 
@@ -133,112 +133,112 @@ Due to the inevitable physical barrier, technological development now tends to a
 In order to explore the potential and limits of the multi-core architectures, this project proposes a parallel implementation of the copying garbage collection, based on the structure presented by Flood and Detlefs \cite{bib:flood:pargc}. %...INSTEAD OF A CONSTANTLY INCREASING PROCESSORS'S SPEED...
 \end{englishabstract}
 
-\chapter{IntroduÁ„o}
+\chapter{Introdu√ß√£o}
 
 \section{Tema}
-O presente projeto propıe a implementaÁ„o de um protÛtipo da estratÈgia da coleta de cÛpia de dois espaÁos paralela para o gerenciamento autom·tico de memÛria na linguagem funcional {\tt pFun}, em desenvolv imento no Grupo de Pesquisa em Processamento Paralelo e DistribuÌdo desta Universidade.
+O presente projeto prop√µe a implementa√ß√£o de um prot√≥tipo da estrat√©gia da coleta de c√≥pia de dois espa√ßos paralela para o gerenciamento autom√°tico de mem√≥ria na linguagem funcional {\tt pFun}, em desenvolv imento no Grupo de Pesquisa em Processamento Paralelo e Distribu√≠do desta Universidade.
 
-\section{MotivaÁ„o}
-%Apesar do crescente aumento das capacidades de memÛria dos computadores, seu tamanho n„o È infinito e, mesmo precisando  tempo adicional para execuÁ„o, 
-As rotinas que fazem o gerenciamento autom·tico de memÛria s„o cada vez mais comuns nas linguagens de programaÁ„o. Segundo \cite{bib:marcos}, linguagens que oferecem coleta de lixo contribuem na agilizaÁ„o do processo de desenvolvimento de um sistema, pois retiram do programador a responsabilidade de liberaÁ„o da memÛria, simplificando a implementaÁ„o de algoritmos comlpexos, alÈm de eliminar erros relacionados ‡ desalocaÁ„o explÌcita de memÛria, como ponteiros referenciando ·reas j· desalocadas (\textit{dangling pointers}) ou mesmo ·reas de memÛria inacessÌveis (\textit{memory leaks}).
+\section{Motiva√ß√£o}
+%Apesar do crescente aumento das capacidades de mem√≥ria dos computadores, seu tamanho n√£o √© infinito e, mesmo precisando  tempo adicional para execu√ß√£o, 
+As rotinas que fazem o gerenciamento autom√°tico de mem√≥ria s√£o cada vez mais comuns nas linguagens de programa√ß√£o. Segundo \cite{bib:marcos}, linguagens que oferecem coleta de lixo contribuem na agiliza√ß√£o do processo de desenvolvimento de um sistema, pois retiram do programador a responsabilidade de libera√ß√£o da mem√≥ria, simplificando a implementa√ß√£o de algoritmos comlpexos, al√©m de eliminar erros relacionados √† desaloca√ß√£o expl√≠cita de mem√≥ria, como ponteiros referenciando √°reas j√° desalocadas (\textit{dangling pointers}) ou mesmo √°reas de mem√≥ria inacess√≠veis (\textit{memory leaks}).
 
-%Estudos comprovam que a gerÍncia autom·tica de memÛria contribui consideravelmente no tempo de execuÁ„o de um programa, uma vez que o programa deve ser interrompido para realizaÁ„o da coleta de lixo. Richard Jones \cite{bib:lins:gc} menciona que o tempo de execuÁ„o tÌpico de coletas de lixo pode chegar a 20\% do tempo total. Esta variaÁ„o d·-se por v·rios fatores, como a residÍncia m·xima da \textit{heap}, a estratÈgia de coleta que est· sendo empregada, entre outros.
+%Estudos comprovam que a ger√™ncia autom√°tica de mem√≥ria contribui consideravelmente no tempo de execu√ß√£o de um programa, uma vez que o programa deve ser interrompido para realiza√ß√£o da coleta de lixo. Richard Jones \cite{bib:lins:gc} menciona que o tempo de execu√ß√£o t√≠pico de coletas de lixo pode chegar a 20\% do tempo total. Esta varia√ß√£o d√°-se por v√°rios fatores, como a resid√™ncia m√°xima da \textit{heap}, a estrat√©gia de coleta que est√° sendo empregada, entre outros.
 
-Maurice Herlihy \cite{bib:herlihy:theart} afirma que a popularizaÁ„o das arquiteturas multicore produzir· grande mudanÁa no modo que os \textit{softwares} s„o desenvolvidos. Antes, o avanÁo tecnolÛgico significava tambÈm o aumento do \textit{clock} dos processadores, consequentemente, um natural \textit{speed-up} das aplicaÁıes. Seguindo a tendÍncia multicore, avanÁos na tecnologia aumentar„o o paralelismo, n„o a velocidade dos processadores. Segundo o autor, saber explorar este paralelismo È um dos novos desafios em CiÍncia da ComputaÁ„o. Nesta nova era, aplicaÁıes sequenciais n„o conseguem tirar proveito da evoluÁ„o dos processadores, mesmo que uma nova vers„o tenha o dobro do n˙mero de \textit{cores} de seu predecessor \cite{bib:dubois:erad}. O potencial das arquiteturas multicore È explorado somente se as aplicaÁıes forem concorrentes ou paralelas, de modo que as tarefas fiquem distribuÌdas nos (possivelmente) v·rios \textit{cores} atravÈs de \textit{threads}.
+Maurice Herlihy \cite{bib:herlihy:theart} afirma que a populariza√ß√£o das arquiteturas multicore produzir√° grande mudan√ßa no modo que os \textit{softwares} s√£o desenvolvidos. Antes, o avan√ßo tecnol√≥gico significava tamb√©m o aumento do \textit{clock} dos processadores, consequentemente, um natural \textit{speed-up} das aplica√ß√µes. Seguindo a tend√™ncia multicore, avan√ßos na tecnologia aumentar√£o o paralelismo, n√£o a velocidade dos processadores. Segundo o autor, saber explorar este paralelismo √© um dos novos desafios em Ci√™ncia da Computa√ß√£o. Nesta nova era, aplica√ß√µes sequenciais n√£o conseguem tirar proveito da evolu√ß√£o dos processadores, mesmo que uma nova vers√£o tenha o dobro do n√∫mero de \textit{cores} de seu predecessor \cite{bib:dubois:erad}. O potencial das arquiteturas multicore √© explorado somente se as aplica√ß√µes forem concorrentes ou paralelas, de modo que as tarefas fiquem distribu√≠das nos (possivelmente) v√°rios \textit{cores} atrav√©s de \textit{threads}.
 
-%Atualmente, a tendÍncia no desenvolvimento de processadores consiste em agregar cada vez mais \textit{cores} (n˙cleos de processamento) ao processador, ao invÈs de aumentar a velocidade do \textit{chip} \cite{bib:dubois:erad}. Deste modo, aplicaÁıes sequenciais n„o conseguem tirar proveito da evoluÁ„o dos processadores, mesmo que este tenha o dobro do n˙mero de \textit{cores} de seu predecessor. O potencial das arquiteturas multicore È explorado somente se as aplicaÁıes forem concorrentes ou paralelas, de modo que as tarefas fiquem distribuÌdas nos (possivelmente) v·rios \textit{cores} atravÈs das \textit{threads}. %com as tarefas distribuÌdas em v·rias linhas de execuÁ„o (\textit{threads}).
+%Atualmente, a tend√™ncia no desenvolvimento de processadores consiste em agregar cada vez mais \textit{cores} (n√∫cleos de processamento) ao processador, ao inv√©s de aumentar a velocidade do \textit{chip} \cite{bib:dubois:erad}. Deste modo, aplica√ß√µes sequenciais n√£o conseguem tirar proveito da evolu√ß√£o dos processadores, mesmo que este tenha o dobro do n√∫mero de \textit{cores} de seu predecessor. O potencial das arquiteturas multicore √© explorado somente se as aplica√ß√µes forem concorrentes ou paralelas, de modo que as tarefas fiquem distribu√≠das nos (possivelmente) v√°rios \textit{cores} atrav√©s das \textit{threads}. %com as tarefas distribu√≠das em v√°rias linhas de execu√ß√£o (\textit{threads}).
 
-%A idÈia agora È juntar os dois par·grafos anteriores: garbage collection + multicore programming
+%A id√©ia agora √© juntar os dois par√°grafos anteriores: garbage collection + multicore programming
 \section{Objetivos}
-Visando utilizar ao m·ximo, de forma otimizada, os recursos oferecidos pela evoluÁ„o tecnolÛgica -- processadores multicore e o crescente aumento da quantidade de memÛria disponÌvel, respectivamente -- este projeto contribui ao discorrer estudos realizados no que tange ao processamento paralelo aplicado ‡ coleta de lixo, abordando problemas relacionados a programaÁ„o concorrente e possÌveis soluÁıes. Propıe-se a implementaÁ„o de um protÛtipo da coleta de cÛpia de dois espaÁos paralela, com base na estrutura apresentada por Christine Flood e David Detlefs \cite{bib:flood:pargc}.
+Visando utilizar ao m√°ximo, de forma otimizada, os recursos oferecidos pela evolu√ß√£o tecnol√≥gica -- processadores multicore e o crescente aumento da quantidade de mem√≥ria dispon√≠vel, respectivamente -- este projeto contribui ao discorrer estudos realizados no que tange ao processamento paralelo aplicado √† coleta de lixo, abordando problemas relacionados a programa√ß√£o concorrente e poss√≠veis solu√ß√µes. Prop√µe-se a implementa√ß√£o de um prot√≥tipo da coleta de c√≥pia de dois espa√ßos paralela, com base na estrutura apresentada por Christine Flood e David Detlefs \cite{bib:flood:pargc}.
 
-%Buscando maior coerÍncia e mesclagem dos assuntos abordados, almeja-se consolidar a implementaÁ„o da estratÈgia de cÛpia de dois espaÁos paralela para o gerenciamento autom·tico de memÛria na linguagem funcional {\tt pFun}.% e estrita, ou seja, onde os argumentos das funÁıes s„o avaliados antes da prÛpria funÁ„o.
-%este projeto vem a contribuir com a comunidade cientÌfica ao propor o d gerenciamento autom·tico de memÛria paralelo em uma linguagem funcional.%, alÈm de colaborar no desenvolvimento da linguagem \texttt{pFun} proposta por \cite{bib:dubois:pfun}.
-% isto vai ajudar a mostrar que os sistemas multiprocessados s„o mesmo eficientes, colaborar no desenvolvimento da linguagem pFun fazendo uso dos sistemas multiprocessados e propociar um ponto de partida para futuros estudos/implementaÁıes de sistemas de execuÁ„o paralelos...
+%Buscando maior coer√™ncia e mesclagem dos assuntos abordados, almeja-se consolidar a implementa√ß√£o da estrat√©gia de c√≥pia de dois espa√ßos paralela para o gerenciamento autom√°tico de mem√≥ria na linguagem funcional {\tt pFun}.% e estrita, ou seja, onde os argumentos das fun√ß√µes s√£o avaliados antes da pr√≥pria fun√ß√£o.
+%este projeto vem a contribuir com a comunidade cient√≠fica ao propor o d gerenciamento autom√°tico de mem√≥ria paralelo em uma linguagem funcional.%, al√©m de colaborar no desenvolvimento da linguagem \texttt{pFun} proposta por \cite{bib:dubois:pfun}.
+% isto vai ajudar a mostrar que os sistemas multiprocessados s√£o mesmo eficientes, colaborar no desenvolvimento da linguagem pFun fazendo uso dos sistemas multiprocessados e propociar um ponto de partida para futuros estudos/implementa√ß√µes de sistemas de execu√ß√£o paralelos...
 
 \section{Estrutura do texto}
-O CapÌtulo \ref{sec:fun} aborda, de maneira geral, as linguagens funcionais, destacando as caracterÌsticas importantes para o projeto; neste capÌtulo a linguagem {\tt pFun} È apresentada, bem como alguns programas exemplo. No CapÌtulo \ref{sec:memmanag}, s„o apresentadas as principais caracterÌsticas de sistemas para gerenciamento autom·tico de memÛria, o porque de sua utilizaÁ„o, alÈm das estratÈgias aplicadas na linguagem {\tt pFun}. Em seguida, tem-se o CapÌtulo \ref{sec:parproc}, que revisa os principais conceitos relaciandos ‡ programaÁ„o paralela, que servem como base para o entendimento deste texto. No decorrer deste mesmo capÌtulo, s„o abordadas as funcionalidades da API POSIX {\it threads} empregadas no projeto. ApÛs, no CapÌtulo \ref{ch:paralgo}, a estrutura do sistema para coleta de lixo paralela È apresentada, incluindo algoritmos. Finalizando, o CapÌtulo \ref{sec:finalizing} apresenta algumas conclusıes a respeito do escopo do projeto e da inevit·vel complexidade inerente ‡ proposta deste, contendo tambÈm alguns resultados de desempenho obtidos.
+O Cap√≠tulo \ref{sec:fun} aborda, de maneira geral, as linguagens funcionais, destacando as caracter√≠sticas importantes para o projeto; neste cap√≠tulo a linguagem {\tt pFun} √© apresentada, bem como alguns programas exemplo. No Cap√≠tulo \ref{sec:memmanag}, s√£o apresentadas as principais caracter√≠sticas de sistemas para gerenciamento autom√°tico de mem√≥ria, o porque de sua utiliza√ß√£o, al√©m das estrat√©gias aplicadas na linguagem {\tt pFun}. Em seguida, tem-se o Cap√≠tulo \ref{sec:parproc}, que revisa os principais conceitos relaciandos √† programa√ß√£o paralela, que servem como base para o entendimento deste texto. No decorrer deste mesmo cap√≠tulo, s√£o abordadas as funcionalidades da API POSIX {\it threads} empregadas no projeto. Ap√≥s, no Cap√≠tulo \ref{ch:paralgo}, a estrutura do sistema para coleta de lixo paralela √© apresentada, incluindo algoritmos. Finalizando, o Cap√≠tulo \ref{sec:finalizing} apresenta algumas conclus√µes a respeito do escopo do projeto e da inevit√°vel complexidade inerente √† proposta deste, contendo tamb√©m alguns resultados de desempenho obtidos.
 
 
 \chapter{Linguagens funcionais} \label{sec:fun}
 
-\section{IntroduÁ„o}
-Linguagens de programaÁ„o funcionais s„o assim conhecidas por serem constituÌdas inteiramente de funÁıes e expressıes. O programa principal È definido como uma funÁ„o matem·tica, que recebe argumentos e devolve um resultado, possivelmente fazendo uso de outras funÁıes.
+\section{Introdu√ß√£o}
+Linguagens de programa√ß√£o funcionais s√£o assim conhecidas por serem constitu√≠das inteiramente de fun√ß√µes e express√µes. O programa principal √© definido como uma fun√ß√£o matem√°tica, que recebe argumentos e devolve um resultado, possivelmente fazendo uso de outras fun√ß√µes.
 
-%De acordo com John Hughes \cite{bib:hughes84}, programas escritos nessas linguagens n„o possuem atribuiÁ„o de vari·veis, ou seja, n„o se pode modificar o conte˙do de um identificador. FunÁıes n„o-aninhadas s„o independentes, pois durante a avaliaÁ„o (processo de calcular o resultado) de qualquer funÁ„o, esta n„o modificar· valores de outras, eliminando muitos erros. Por consequÍncia, tem-se que a ordem de execuÁ„o das funÁıes È irrelevante, alÈm de o programador n„o precisar se preocupar com controle de fluxo.
+%De acordo com John Hughes \cite{bib:hughes84}, programas escritos nessas linguagens n√£o possuem atribui√ß√£o de vari√°veis, ou seja, n√£o se pode modificar o conte√∫do de um identificador. Fun√ß√µes n√£o-aninhadas s√£o independentes, pois durante a avalia√ß√£o (processo de calcular o resultado) de qualquer fun√ß√£o, esta n√£o modificar√° valores de outras, eliminando muitos erros. Por consequ√™ncia, tem-se que a ordem de execu√ß√£o das fun√ß√µes √© irrelevante, al√©m de o programador n√£o precisar se preocupar com controle de fluxo.
 
-Programas escritos em linguagens funcionais puras n„o possuem atribuiÁ„o de vari·veis \cite{bib:hughes84}. N„o existe controle de dependÍncias implÌcito entre as subexpressıes, podendo estas serem avaliadas (processo de calcular o resultado) em qualquer ordem, e sempre retornar„o o mesmo resultado. Por consequÍncia, tem-se que a ordem de execuÁ„o das funÁıes È irrelevante.%, alÈm de o programador n„o precisar se preocupar com controle de fluxo.
+Programas escritos em linguagens funcionais puras n√£o possuem atribui√ß√£o de vari√°veis \cite{bib:hughes84}. N√£o existe controle de depend√™ncias impl√≠cito entre as subexpress√µes, podendo estas serem avaliadas (processo de calcular o resultado) em qualquer ordem, e sempre retornar√£o o mesmo resultado. Por consequ√™ncia, tem-se que a ordem de execu√ß√£o das fun√ß√µes √© irrelevante.%, al√©m de o programador n√£o precisar se preocupar com controle de fluxo.
 
-A vis„o do mundo matem·tico das linguagens funcionais est· presente em muitos aspectos, como as construÁıes sint·ticas, que existem para facilitar a especificaÁ„o de conjuntos e funÁıes recursivas \cite{bib:grune}. Ainda mais importante È a idÈia de que o programador n„o deve se preocupar com detalhes de implementaÁ„o, mas sim com a relaÁ„o entrada/saÌda. Em particular, o programador deve especificar o que calcular, n„o como, onde e quando. N„o h· repetiÁıes ou qualquer instruÁ„o indicando fluxo de execuÁ„o.
+A vis√£o do mundo matem√°tico das linguagens funcionais est√° presente em muitos aspectos, como as constru√ß√µes sint√°ticas, que existem para facilitar a especifica√ß√£o de conjuntos e fun√ß√µes recursivas \cite{bib:grune}. Ainda mais importante √© a id√©ia de que o programador n√£o deve se preocupar com detalhes de implementa√ß√£o, mas sim com a rela√ß√£o entrada/sa√≠da. Em particular, o programador deve especificar o que calcular, n√£o como, onde e quando. N√£o h√° repeti√ß√µes ou qualquer instru√ß√£o indicando fluxo de execu√ß√£o.
 
 
 \section{Linguagem \texttt{pFun}}
-\texttt{pFun} È uma linguagem de programaÁ„o funcional pura e paralela semi-explÌcita
- que oferece as primitivas \texttt{par} e \texttt{sync} para expressar paralelismo e bloqueio de execuÁ„o, respectivamente \cite{bib:dubois:pfun}. O sistema de execuÁ„o da \texttt{pFun} È baseado em \textit{work servers}, que distribuem tarefas a volunt·rios, e \textit{slaves}, que se conectam aos \textit{servers} em busca de computaÁıes a serem executadas; possui um interpretador de \textit{byte-codes}; e dois sistemas para coleta de lixo implementados (ver seÁ„o \ref{sec:gcpfun}).
+\texttt{pFun} √© uma linguagem de programa√ß√£o funcional pura e paralela semi-expl√≠cita
+ que oferece as primitivas \texttt{par} e \texttt{sync} para expressar paralelismo e bloqueio de execu√ß√£o, respectivamente \cite{bib:dubois:pfun}. O sistema de execu√ß√£o da \texttt{pFun} √© baseado em \textit{work servers}, que distribuem tarefas a volunt√°rios, e \textit{slaves}, que se conectam aos \textit{servers} em busca de computa√ß√µes a serem executadas; possui um interpretador de \textit{byte-codes}; e dois sistemas para coleta de lixo implementados (ver se√ß√£o \ref{sec:gcpfun}).
 
 \lstinputlisting[label=src:fib30,
-								 caption=N˙meros de fibonacci em \texttt{pFun}.]
+								 caption=N√∫meros de fibonacci em \texttt{pFun}.]
 								 {codes/fib.fun}
 
-O Programa \ref{src:fib30}, escrito em \texttt{pFun}, implementa a funÁ„o que calcula \textit{n}-Èsimo n˙mero da sequÍncia de \texttt{fibonacci}, assim recursivamente definida:
+O Programa \ref{src:fib30}, escrito em \texttt{pFun}, implementa a fun√ß√£o que calcula \textit{n}-√©simo n√∫mero da sequ√™ncia de \texttt{fibonacci}, assim recursivamente definida:
 
 \begin{equation*}
 fib(n) = 
 	\begin{cases}
 	1 & \text{se $n < 2$} \\
-	fib(n-1) + fib(n-2) & \text{caso contr·rio}
+	fib(n-1) + fib(n-2) & \text{caso contr√°rio}
 	\end{cases}
 \end{equation*}
 
-Na linha 5, tem-se que a funÁ„o principal \texttt{main} È definida de forma a calcular o trigÈsimo n˙mero da sequÍncia de \texttt{fibonacci}.
+Na linha 5, tem-se que a fun√ß√£o principal \texttt{main} √© definida de forma a calcular o trig√©simo n√∫mero da sequ√™ncia de \texttt{fibonacci}.
 
 \subsection{Expressando paralelismo}
-{\tt pFun} oferece as primitivas {\tt par} e {\tt sync} para expressar paralelismo. A primitiva {\tt par}, que indica paralelismo em potencial, recebe como argumento uma express„o de qualquer tipo {\tt a} e retorna uma referÍncia a um objeto {\tt Task}, que calcula o valor da express„o:
+{\tt pFun} oferece as primitivas {\tt par} e {\tt sync} para expressar paralelismo. A primitiva {\tt par}, que indica paralelismo em potencial, recebe como argumento uma express√£o de qualquer tipo {\tt a} e retorna uma refer√™ncia a um objeto {\tt Task}, que calcula o valor da express√£o:
 \begin{verbatim}
 par :: a -> Task a
 \end{verbatim}
 
-A primitiva {\tt par} n„o garante que uma express„o ser· avaliada paralelamente ao restante do programa, apenas sinaliza expressıes que podem ser paraleliz·veis. O escalonamento e a distribuiÁ„o das tarefas s„o controlados pelo sistema de execuÁ„o da linguagem.
+A primitiva {\tt par} n√£o garante que uma express√£o ser√° avaliada paralelamente ao restante do programa, apenas sinaliza express√µes que podem ser paraleliz√°veis. O escalonamento e a distribui√ß√£o das tarefas s√£o controlados pelo sistema de execu√ß√£o da linguagem.
 
-A primitiva {\tt sync} recebe como argumento uma referÍncia a um objeto {\tt Task} e retorna o resultado de sua avaliaÁ„o. Esta deve bloquear se seu argumento est· sendo avaliado em um computador remoto ou criar um novo fluxo de execuÁ„o para avaliar este argumento. {\tt Sync} possui a seguinte configuraÁ„o:
+A primitiva {\tt sync} recebe como argumento uma refer√™ncia a um objeto {\tt Task} e retorna o resultado de sua avalia√ß√£o. Esta deve bloquear se seu argumento est√° sendo avaliado em um computador remoto ou criar um novo fluxo de execu√ß√£o para avaliar este argumento. {\tt Sync} possui a seguinte configura√ß√£o:
 \begin{verbatim}
 sync :: Task a -> a
 \end{verbatim}
 
-O Programa \ref{src:parfib} apresenta um exemplo de implementaÁ„o paralela dos n˙meros de fibonacci em {\tt pFun}.
+O Programa \ref{src:parfib} apresenta um exemplo de implementa√ß√£o paralela dos n√∫meros de fibonacci em {\tt pFun}.
 
 \lstinputlisting[label=src:parfib,
-								 caption=ImplementaÁ„o paralela dos n˙meros de fibonacci em \texttt{pFun}.]
+								 caption=Implementa√ß√£o paralela dos n√∫meros de fibonacci em \texttt{pFun}.]
 								 {codes/parfib.fun}
 
-Segundo Du Bois \cite{bib:dubois:pfun}, para qualquer express„o puramente funcional escrita em {\tt pFun}, a seguinte propriedade se mantÈm:
+Segundo Du Bois \cite{bib:dubois:pfun}, para qualquer express√£o puramente funcional escrita em {\tt pFun}, a seguinte propriedade se mant√©m:
 \begin{verbatim}
 sync (par exp) == exp
 \end{verbatim}
 
-N„o importa se a avaliaÁ„o estiver sendo feita localmente ou em um computador remoto, a express„o retornar· sempre o mesmo resultado.
+N√£o importa se a avalia√ß√£o estiver sendo feita localmente ou em um computador remoto, a express√£o retornar√° sempre o mesmo resultado.
 
-\subsection{O sistema de execuÁ„o da \texttt{pFun}}
-Um sistema de execuÁ„o -- do InglÍs, {\it run-time system (RTS)} -- gerencia os detalhes que est„o entre o programa do usu·rio e o sistema operacional, como controle do processo de execuÁ„o, estrutura organizacional de memÛria e coleta de lixo. Desenvolvido em \texttt{C}, o sistema de execuÁ„o da linguagem \texttt{pFun} implementa um interpretador de {\it byte-codes} (pseudo-cÛdigo gerado por um compilador) utilizando uma pilha e \textit{stack-frames} para separar chamadas aninhadas de funÁıes. As funcionalidades do interpretador s„o descritas nas sub-seÁıes seguintes.
+\subsection{O sistema de execu√ß√£o da \texttt{pFun}}
+Um sistema de execu√ß√£o -- do Ingl√™s, {\it run-time system (RTS)} -- gerencia os detalhes que est√£o entre o programa do usu√°rio e o sistema operacional, como controle do processo de execu√ß√£o, estrutura organizacional de mem√≥ria e coleta de lixo. Desenvolvido em \texttt{C}, o sistema de execu√ß√£o da linguagem \texttt{pFun} implementa um interpretador de {\it byte-codes} (pseudo-c√≥digo gerado por um compilador) utilizando uma pilha e \textit{stack-frames} para separar chamadas aninhadas de fun√ß√µes. As funcionalidades do interpretador s√£o descritas nas sub-se√ß√µes seguintes.
 
-A primitiva {\tt par} cria uma suspens„o de seus argumentos na memÛria. Uma suspens„o È uma computaÁ„o suspensa que pode ser reiniciada a qualquer momento. A express„o
+A primitiva {\tt par} cria uma suspens√£o de seus argumentos na mem√≥ria. Uma suspens√£o √© uma computa√ß√£o suspensa que pode ser reiniciada a qualquer momento. A express√£o
 \begin{verbatim}
 par (f arg1 arg2 ... argn)
 \end{verbatim}
 
-\noindent cria uma suspens„o contendo um cabeÁalho, um ponteiro para a respectiva funÁ„o e uma lista de argumentos. ApÛs criada, a suspens„o È adicionada a um objeto \texttt{Task} e colocada em uma {\it taskpool} (·rea de memÛria onde residem tarefas remotas). Uma chamada a \texttt{par} retorna um objeto \texttt{Task}.%, cujos estados podem ser:
+\noindent cria uma suspens√£o contendo um cabe√ßalho, um ponteiro para a respectiva fun√ß√£o e uma lista de argumentos. Ap√≥s criada, a suspens√£o √© adicionada a um objeto \texttt{Task} e colocada em uma {\it taskpool} (√°rea de mem√≥ria onde residem tarefas remotas). Uma chamada a \texttt{par} retorna um objeto \texttt{Task}.%, cujos estados podem ser:
 
 Uma chamada a \texttt{sync} recebe um \texttt{Task} como argumento, que pode estar nos seguintes estados:
 \begin{itemize}
-\item \texttt{Not Evaluated}: quando uma tarefa ainda n„o foi avaliada, ou seja, n„o processada;
-\item \texttt{Being Evaluated}: tarefa em avaliaÁ„o;
-\item \texttt{Evaluated}: processo de avaliaÁ„o da tarefa concluÌdo.
+\item \texttt{Not Evaluated}: quando uma tarefa ainda n√£o foi avaliada, ou seja, n√£o processada;
+\item \texttt{Being Evaluated}: tarefa em avalia√ß√£o;
+\item \texttt{Evaluated}: processo de avalia√ß√£o da tarefa conclu√≠do.
 \end{itemize}
 
-Se o objeto \texttt{Task} ainda n„o foi avaliado, \texttt{sync} cria um objeto {\tt Thread} para avaliar o objeto suspens„o apontado por \texttt{Task}. Se \texttt{Task} est· em processo de avaliaÁ„o, \texttt{sync} bloqueia a \textit{thread} corrente e a coloca na lista de {\it threads} bloqueadas do objeto \texttt{Task}. No caso do argumento j· ter sido avaliado, deve ser retornado o resultado da computaÁ„o de \texttt{Task}. 
+Se o objeto \texttt{Task} ainda n√£o foi avaliado, \texttt{sync} cria um objeto {\tt Thread} para avaliar o objeto suspens√£o apontado por \texttt{Task}. Se \texttt{Task} est√° em processo de avalia√ß√£o, \texttt{sync} bloqueia a \textit{thread} corrente e a coloca na lista de {\it threads} bloqueadas do objeto \texttt{Task}. No caso do argumento j√° ter sido avaliado, deve ser retornado o resultado da computa√ß√£o de \texttt{Task}. 
 
-\subsection{ComputaÁıes distribuÌdas na \texttt{pFun}}
-O modelo de computaÁ„o distribuÌda de {\tt pFun} È baseado em computadores ociosos (os volunt·rios) cedendo tempo de CPU para alguma computaÁ„o. A arquitetura distribuÌda È composta de dois tipos de nodos: {\it slaves} e {\it work servers}, como mostra a Figura \ref{fig:serverslaves}. Os \textit{slaves} s„o computadores que se conectam ao {\it work server} solicitando alguma computaÁ„o a realizar. ApÛs executar a computaÁ„o, o {\it slave} devolve o resultado ao respectivo servidor. A comunicaÁ„o entre os {\it servers} e {\it slaves} exige que as expressıes trocadas sejam serializadas, de forma a serem enviadas pela rede de interconex„o.
+\subsection{Computa√ß√µes distribu√≠das na \texttt{pFun}}
+O modelo de computa√ß√£o distribu√≠da de {\tt pFun} √© baseado em computadores ociosos (os volunt√°rios) cedendo tempo de CPU para alguma computa√ß√£o. A arquitetura distribu√≠da √© composta de dois tipos de nodos: {\it slaves} e {\it work servers}, como mostra a Figura \ref{fig:serverslaves}. Os \textit{slaves} s√£o computadores que se conectam ao {\it work server} solicitando alguma computa√ß√£o a realizar. Ap√≥s executar a computa√ß√£o, o {\it slave} devolve o resultado ao respectivo servidor. A comunica√ß√£o entre os {\it servers} e {\it slaves} exige que as express√µes trocadas sejam serializadas, de forma a serem enviadas pela rede de interconex√£o.
 
 \begin{figure}[htbp]
 \centering
@@ -247,34 +247,34 @@ O modelo de computaÁ„o distribuÌda de {\tt pFun} È baseado em computadores ocios
 \label{fig:serverslaves}
 \end{figure}
 
-N„o se deve confundir o modelo de computaÁ„o distribuÌda da linguagem {\tt pFun} com coleta de lixo paralela. Apesar de enviar computaÁıes pela rede, cada {\it slave} em execuÁ„o realiza sua prÛpria coleta de lixo localmente, de forma totalmente independente. Portanto, a coleta de lixo ocorrer· somente no computador em que a computaÁ„o estiver executando.
+N√£o se deve confundir o modelo de computa√ß√£o distribu√≠da da linguagem {\tt pFun} com coleta de lixo paralela. Apesar de enviar computa√ß√µes pela rede, cada {\it slave} em execu√ß√£o realiza sua pr√≥pria coleta de lixo localmente, de forma totalmente independente. Portanto, a coleta de lixo ocorrer√° somente no computador em que a computa√ß√£o estiver executando.
 
-%\section{Sistemas de execuÁ„o} \label{sec:rts}
-%Desenvolvido em \texttt{C}, o sistema de execuÁ„o (\textit{run-time system}) da linguagem \texttt{pFun} implementa um interpretador de \textit{byte-codes} (pseudo-cÛdigo gerado pelo compilador) utilizando uma pilha e \textit{stack-frames} para separar chamadas aninhadas de funÁıes. As funcionalidades do interpretador s„o descritas nas sub-seÁıes seguintes, segundo \cite{ref:pfun}; a exceÁ„o È o sistema para gerenciamento autom·tico de memÛria, que È abordado pela seÁ„o \ref{sec:gc}.
+%\section{Sistemas de execu√ß√£o} \label{sec:rts}
+%Desenvolvido em \texttt{C}, o sistema de execu√ß√£o (\textit{run-time system}) da linguagem \texttt{pFun} implementa um interpretador de \textit{byte-codes} (pseudo-c√≥digo gerado pelo compilador) utilizando uma pilha e \textit{stack-frames} para separar chamadas aninhadas de fun√ß√µes. As funcionalidades do interpretador s√£o descritas nas sub-se√ß√µes seguintes, segundo \cite{ref:pfun}; a exce√ß√£o √© o sistema para gerenciamento autom√°tico de mem√≥ria, que √© abordado pela se√ß√£o \ref{sec:gc}.
 
-%Entre os componentes de uma m·quina virtual, est· o coletor de lixo, abordado em mais detalhes prÛximo capÌtulo \ref{sec:gc}.
+%Entre os componentes de uma m√°quina virtual, est√° o coletor de lixo, abordado em mais detalhes pr√≥ximo cap√≠tulo \ref{sec:gc}.
 
 
 
-\chapter{GerÍncia autom·tica de memÛria} \label{sec:memmanag}
+\chapter{Ger√™ncia autom√°tica de mem√≥ria} \label{sec:memmanag}
 
-\section{IntroduÁ„o}
-Muitas linguagens de programaÁ„o permitem a alocaÁ„o din‚mica de blocos de memÛria cuja existÍncia n„o est· limitada ‡ funÁ„o criadora. Estes blocos s„o armazenados no que chamamos de \textit{heap}: porÁ„o de memÛria que armazena dados com escopo indefinido \cite{bib:herlihy:theart}.
+\section{Introdu√ß√£o}
+Muitas linguagens de programa√ß√£o permitem a aloca√ß√£o din√¢mica de blocos de mem√≥ria cuja exist√™ncia n√£o est√° limitada √† fun√ß√£o criadora. Estes blocos s√£o armazenados no que chamamos de \textit{heap}: por√ß√£o de mem√≥ria que armazena dados com escopo indefinido \cite{bib:herlihy:theart}.
 
-Na maioria das linguagens de programaÁ„o imperativas, a tarefa de alocaÁ„o e liberaÁ„o de recursos, enfim, a gerÍncia de memÛria È atribuÌda ao programador \cite{bib:lins:gc}. Isto È, apÛs alocar um bloco de memÛria, o programador decide quando este deve ser liberado, consequentemente, deve-se ter certeza do momento correto para tal. Uma tentativa de acesso, modificaÁ„o ou liberaÁ„o de uma ·rea de memÛria n„o alocada pode causar interrupÁ„o da execuÁ„o do programa. 
-% ou mesmo corromper a execuÁ„o do sistema operacional (dependendo do sistema). %O trecho de cÛdigo ~\ref{src:expalloc} mostra como È feita a alocaÁ„o e liberaÁ„o da memÛria na linguagem \texttt{C}.
+Na maioria das linguagens de programa√ß√£o imperativas, a tarefa de aloca√ß√£o e libera√ß√£o de recursos, enfim, a ger√™ncia de mem√≥ria √© atribu√≠da ao programador \cite{bib:lins:gc}. Isto √©, ap√≥s alocar um bloco de mem√≥ria, o programador decide quando este deve ser liberado, consequentemente, deve-se ter certeza do momento correto para tal. Uma tentativa de acesso, modifica√ß√£o ou libera√ß√£o de uma √°rea de mem√≥ria n√£o alocada pode causar interrup√ß√£o da execu√ß√£o do programa. 
+% ou mesmo corromper a execu√ß√£o do sistema operacional (dependendo do sistema). %O trecho de c√≥digo ~\ref{src:expalloc} mostra como √© feita a aloca√ß√£o e libera√ß√£o da mem√≥ria na linguagem \texttt{C}.
 
-O termo \textbf{coleta de lixo}, do InglÍs \textit{garbage collection}, refere-se a aÁ„o de liberar (ou recuperar) automaticamente aqueles objetos (blocos de memÛria) n„o mais referenciados pelo programa, deixando espaÁo livre para futuras alocaÁıes \cite{bib:samsom:gengc}. O ponto de partida para a realizaÁ„o da coleta de lixo È chamado conjunto-raiz e, segundo \cite{bib:marcos}, este pode incluir dados globais, dados alocados na pilha de execuÁ„o e endereÁos armazenados em registradores. No sistema de execuÁ„o da linguagem \texttt{pFun}, coleta de lixo È essencial, pois nas linguagens funcionais deve-se especificar funÁıes, sem levar em conta detalhes da execuÁ„o.
+O termo \textbf{coleta de lixo}, do Ingl√™s \textit{garbage collection}, refere-se a a√ß√£o de liberar (ou recuperar) automaticamente aqueles objetos (blocos de mem√≥ria) n√£o mais referenciados pelo programa, deixando espa√ßo livre para futuras aloca√ß√µes \cite{bib:samsom:gengc}. O ponto de partida para a realiza√ß√£o da coleta de lixo √© chamado conjunto-raiz e, segundo \cite{bib:marcos}, este pode incluir dados globais, dados alocados na pilha de execu√ß√£o e endere√ßos armazenados em registradores. No sistema de execu√ß√£o da linguagem \texttt{pFun}, coleta de lixo √© essencial, pois nas linguagens funcionais deve-se especificar fun√ß√µes, sem levar em conta detalhes da execu√ß√£o.
 
-Estudos comprovam que a gerÍncia autom·tica de memÛria contribui consideravelmente no tempo de execuÁ„o de um programa, uma vez que o programa deve ser interrompido para realizaÁ„o da coleta de lixo. Richard Jones e Rafael Lins \cite{bib:lins:gc} mencionam que o tempo de execuÁ„o tÌpico de coletas de lixo pode chegar a 20\% do tempo de execuÁ„o total do programa. Esta variaÁ„o d·-se por v·rios fatores, como a residÍncia m·xima da {\it heap}, a estratÈgia de coleta que est· sendo empregada, entre outros.
-%como o desempenho da memÛria {\it cache}, a residÍncia m·xima da {\it heap}, a estratÈgia de coleta que est· sendo empregada, entre outros.
+Estudos comprovam que a ger√™ncia autom√°tica de mem√≥ria contribui consideravelmente no tempo de execu√ß√£o de um programa, uma vez que o programa deve ser interrompido para realiza√ß√£o da coleta de lixo. Richard Jones e Rafael Lins \cite{bib:lins:gc} mencionam que o tempo de execu√ß√£o t√≠pico de coletas de lixo pode chegar a 20\% do tempo de execu√ß√£o total do programa. Esta varia√ß√£o d√°-se por v√°rios fatores, como a resid√™ncia m√°xima da {\it heap}, a estrat√©gia de coleta que est√° sendo empregada, entre outros.
+%como o desempenho da mem√≥ria {\it cache}, a resid√™ncia m√°xima da {\it heap}, a estrat√©gia de coleta que est√° sendo empregada, entre outros.
 
-%\section{Vantagens da utilizaÁ„o de coleta de lixo} \label{sec:whygc}
-%Em linguagens de programaÁ„o funcionais, a preocupaÁ„o È com a definiÁ„o de funÁıes, ou seja, \textbf{o quÍ} ela deve fazer, n„o \textbf{como} ela faz. Em programaÁ„o funcional, o programador n„o deve se preocupar com a alocaÁ„o de recursos por parte do programa, o foco deve ser o funcionamento do mesmo.
-%Ao programar em uma linguagem que oferece coleta de lixo, o programador concentra seus esforÁos no conhecimento local da aplicaÁ„o que est· desenvolvendo, alocaÁ„o e recuperaÁ„o de memÛria exigem conhecimento global do programa (AUTHORS HERE). Mais especificamente, programadores n„o costumam saber que determinada porÁ„o de memÛria est· ainda em uso por um trecho de cÛdigo qualquer; mais difÌcil È saber o que a aplicaÁ„o far· com aquela memÛria em tempo de execuÁ„o. Ao usar coleta de lixo, o programador È liberado da preocupaÁ„o com o estado global do programa, podendo se concentrar no mais importante, que È o funcionamento da aplicaÁ„o.
+%\section{Vantagens da utiliza√ß√£o de coleta de lixo} \label{sec:whygc}
+%Em linguagens de programa√ß√£o funcionais, a preocupa√ß√£o √© com a defini√ß√£o de fun√ß√µes, ou seja, \textbf{o qu√™} ela deve fazer, n√£o \textbf{como} ela faz. Em programa√ß√£o funcional, o programador n√£o deve se preocupar com a aloca√ß√£o de recursos por parte do programa, o foco deve ser o funcionamento do mesmo.
+%Ao programar em uma linguagem que oferece coleta de lixo, o programador concentra seus esfor√ßos no conhecimento local da aplica√ß√£o que est√° desenvolvendo, aloca√ß√£o e recupera√ß√£o de mem√≥ria exigem conhecimento global do programa (AUTHORS HERE). Mais especificamente, programadores n√£o costumam saber que determinada por√ß√£o de mem√≥ria est√° ainda em uso por um trecho de c√≥digo qualquer; mais dif√≠cil √© saber o que a aplica√ß√£o far√° com aquela mem√≥ria em tempo de execu√ß√£o. Ao usar coleta de lixo, o programador √© liberado da preocupa√ß√£o com o estado global do programa, podendo se concentrar no mais importante, que √© o funcionamento da aplica√ß√£o.
 
-\section{Ponteiros e alocaÁ„o din‚mica de memÛria} \label{sec:ptr}
-Na linguagem \texttt{C}, pode-se acessar posiÁıes de memÛria diretamente atravÈs de vari·veis ou indiretamente, via ponteiros. Vari·veis s„o porÁıes de memÛria que consistem de um ou mais \textit{bytes} contÌguos. ApÛs declarada, toda vari·vel possui um nome, um valor e um endereÁo de memÛria; o acesso ao conte˙do de uma vari·vel È feito pelo seu nome. Ponteiros s„o vari·veis que podem armazenar endereÁos de outras vari·veis ou mesmo ·reas de memÛria alocadas. Abaixo, tem-se a declaraÁ„o de um ponteiro para vari·veis do tipo inteiro, em seguida, È mostrado o modo de armazenar o endereÁo da vari·vel \texttt{number} neste ponteiro. A Figura ~\ref{fig:ptr} È uma representaÁ„o abstrata de como um ponteiro armazena endereÁos.
+\section{Ponteiros e aloca√ß√£o din√¢mica de mem√≥ria} \label{sec:ptr}
+Na linguagem \texttt{C}, pode-se acessar posi√ß√µes de mem√≥ria diretamente atrav√©s de vari√°veis ou indiretamente, via ponteiros. Vari√°veis s√£o por√ß√µes de mem√≥ria que consistem de um ou mais \textit{bytes} cont√≠guos. Ap√≥s declarada, toda vari√°vel possui um nome, um valor e um endere√ßo de mem√≥ria; o acesso ao conte√∫do de uma vari√°vel √© feito pelo seu nome. Ponteiros s√£o vari√°veis que podem armazenar endere√ßos de outras vari√°veis ou mesmo √°reas de mem√≥ria alocadas. Abaixo, tem-se a declara√ß√£o de um ponteiro para vari√°veis do tipo inteiro, em seguida, √© mostrado o modo de armazenar o endere√ßo da vari√°vel \texttt{number} neste ponteiro. A Figura ~\ref{fig:ptr} √© uma representa√ß√£o abstrata de como um ponteiro armazena endere√ßos.
 
 \begin{verbatim}
 int number = 5, *ptr;
@@ -284,130 +284,130 @@ ptr = &number;
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.6\textwidth]{images/pointer.png}
-\caption{Como um ponteiro armazena endereÁos \cite{bib:horton:begc}.}
+\caption{Como um ponteiro armazena endere√ßos \cite{bib:horton:begc}.}
 \label{fig:ptr}
 \end{figure}
 
-As declaraÁıes de vari·veis apresentadas acima s„o ditas est·ticas, pois s„o definidas em tempo de compilaÁ„o. O Programa ~\ref{src:expalloc} apresenta um exemplo de alocaÁ„o din‚mica de memÛria utilizando a funÁ„o \texttt{malloc()}, da biblioteca padr„o de \texttt{C}. Quando \texttt{malloc()} È utilizada, deve-se especificar a quantidade de \textit{bytes} a serem alocados; a funÁ„o retorna o endereÁo do primeiro \textit{byte} da sequÍncia. Como mostrado na linha 12, uma maneira pr·tica de especificar quantos \textit{bytes} devem ser alocados È utilizando o operador un·rio \texttt{sizeof}, que atua sobre um tipo definido e retorna o n˙mero de \textit{bytes} que este ocupa em memÛria. A estrutura {\tt memblock} ocupa 12 \textit{bytes}. Quando {\tt bp} n„o for mais utilizada, esta deve ser liberada manualmente utilizando a funÁ„o {\tt free()} (linha 14).
+As declara√ß√µes de vari√°veis apresentadas acima s√£o ditas est√°ticas, pois s√£o definidas em tempo de compila√ß√£o. O Programa ~\ref{src:expalloc} apresenta um exemplo de aloca√ß√£o din√¢mica de mem√≥ria utilizando a fun√ß√£o \texttt{malloc()}, da biblioteca padr√£o de \texttt{C}. Quando \texttt{malloc()} √© utilizada, deve-se especificar a quantidade de \textit{bytes} a serem alocados; a fun√ß√£o retorna o endere√ßo do primeiro \textit{byte} da sequ√™ncia. Como mostrado na linha 12, uma maneira pr√°tica de especificar quantos \textit{bytes} devem ser alocados √© utilizando o operador un√°rio \texttt{sizeof}, que atua sobre um tipo definido e retorna o n√∫mero de \textit{bytes} que este ocupa em mem√≥ria. A estrutura {\tt memblock} ocupa 12 \textit{bytes}. Quando {\tt bp} n√£o for mais utilizada, esta deve ser liberada manualmente utilizando a fun√ß√£o {\tt free()} (linha 14).
 
 \lstinputlisting[language=C, label=src:expalloc,
-								 caption=Alocando memÛria explicitamente.]
+								 caption=Alocando mem√≥ria explicitamente.]
 								 {codes/explicit_alloc.c}
 
 
-\section{Objetos inalcanÁ·veis} \label{sec:unreach}
-Objetos alocados dinamicamente podem se tornar inalcanÁ·veis, como mostra o Programa \ref{src:unreach}, escrito na linguagem \texttt{C}. Neste caso, tem-se a alocaÁ„o de um bloco de memÛria apontado por \texttt{x}, em seguida, a porÁ„o de memÛria referenciada por \texttt{x} È modificada. Entretanto, a linha 5 aloca uma nova ·rea de memÛria fazendo com que \texttt{x} aponte para esta, ent„o, a memÛria contendo os valores
+\section{Objetos inalcan√ß√°veis} \label{sec:unreach}
+Objetos alocados dinamicamente podem se tornar inalcan√ß√°veis, como mostra o Programa \ref{src:unreach}, escrito na linguagem \texttt{C}. Neste caso, tem-se a aloca√ß√£o de um bloco de mem√≥ria apontado por \texttt{x}, em seguida, a por√ß√£o de mem√≥ria referenciada por \texttt{x} √© modificada. Entretanto, a linha 5 aloca uma nova √°rea de mem√≥ria fazendo com que \texttt{x} aponte para esta, ent√£o, a mem√≥ria contendo os valores
 \begin{center} $a=30$ e $b=87.2$ \end{center}
-n„o est· mais acessÌvel, pois nenhuma outra vari·vel ponteiro armazena seu endereÁo. Esta porÁ„o de memÛria inacessÌvel È chamada lixo, e ser· desalocada apenas quando o programa encerrar.
+n√£o est√° mais acess√≠vel, pois nenhuma outra vari√°vel ponteiro armazena seu endere√ßo. Esta por√ß√£o de mem√≥ria inacess√≠vel √© chamada lixo, e ser√° desalocada apenas quando o programa encerrar.
 
 \lstinputlisting[language=C, label=src:unreach,
-								 caption=Tornando uma ·rea de memÛria inalcanÁ·vel.]
+								 caption=Tornando uma √°rea de mem√≥ria inalcan√ß√°vel.]
 								 {codes/unreachable.c}
 
-%Deste modo, È possÌvel fazer um programa cuja finalidade È consumir recursos do sistema sem liber·-los...
+%Deste modo, √© poss√≠vel fazer um programa cuja finalidade √© consumir recursos do sistema sem liber√°-los...
 
 %A typical approach to garbage collection is therefore to identify all reachable objects and reclaim any previously allocated memory that the reachable objects do not occupy. A typical garbage collector may identify reachable objects by tracing objects pointed to from a root, tracing objects pointed to from those reachable objects, and so on until all the referenced or pointed to objects are found and are retained. Thus the last objects found will have no pointers to other untraced objects. In this way unreachable objects are in effect discarded and their memory space becomes free for alternative use.
 
-%\section{Sistemas de execuÁ„o} \label{sec:rts}
-%Sistema que interpreta cÛdigo escrito em determinada linguagem (REFORMULAR).
+%\section{Sistemas de execu√ß√£o} \label{sec:rts}
+%Sistema que interpreta c√≥digo escrito em determinada linguagem (REFORMULAR).
 
 %\subsection{Ambientes baseados em pilhas}
-%Em linguagens que permitam chamadas recursivas de procedimentos/funÁıes, nas quais vari·veis locais recebam novas posiÁıes a cada invocaÁ„o, os registros de ativaÁ„o (O Q … UM REGISTRO DE ATIVA«√O???) n„o podem ser alocados estaticamente \cite{bib:louden}. Em vez disso, a cada novo registro, este deve ser alocado no topo de uma pilha. Assim, cada funÁ„o pode manter v·rios registros distintos na pilha ao mesmo tempo, cada um deles representando uma chamada diferente. Deve-se guardar informaÁıes adicionais que permitam preservar a sequÍncia de chamadas de funÁıes.
+%Em linguagens que permitam chamadas recursivas de procedimentos/fun√ß√µes, nas quais vari√°veis locais recebam novas posi√ß√µes a cada invoca√ß√£o, os registros de ativa√ß√£o (O Q √â UM REGISTRO DE ATIVA√á√ÉO???) n√£o podem ser alocados estaticamente \cite{bib:louden}. Em vez disso, a cada novo registro, este deve ser alocado no topo de uma pilha. Assim, cada fun√ß√£o pode manter v√°rios registros distintos na pilha ao mesmo tempo, cada um deles representando uma chamada diferente. Deve-se guardar informa√ß√µes adicionais que permitam preservar a sequ√™ncia de chamadas de fun√ß√µes.
 
-%\subsection{Sistemas totalmente din‚micos}
-%Segundo Louden \cite{bib:louden} princÌpio essencial no projeto de uma linguagem funcional È fazer com que as funÁıes sejam o mais gerais quanto possÌvel, ou seja, funÁıes podem ser definidas com escopo local, passadas como argumentos e retornadas como resultado. Portanto, para esta classe de linguagens, um sistema de execuÁ„o baseado em pilhas È inadequado, sendo necess·rio uma forma mais genÈrica de ambiente. Estes s„o conhecidos como sitemas de execuÁ„o totalmente din‚micos, pois descartam os registros de ativaÁ„o apenas quando estes n„o forem mais referenciados, visto que devem ser liberados dinamicamente em instantes arbitr·rios durante a execuÁ„o.
+%\subsection{Sistemas totalmente din√¢micos}
+%Segundo Louden \cite{bib:louden} princ√≠pio essencial no projeto de uma linguagem funcional √© fazer com que as fun√ß√µes sejam o mais gerais quanto poss√≠vel, ou seja, fun√ß√µes podem ser definidas com escopo local, passadas como argumentos e retornadas como resultado. Portanto, para esta classe de linguagens, um sistema de execu√ß√£o baseado em pilhas √© inadequado, sendo necess√°rio uma forma mais gen√©rica de ambiente. Estes s√£o conhecidos como sitemas de execu√ß√£o totalmente din√¢micos, pois descartam os registros de ativa√ß√£o apenas quando estes n√£o forem mais referenciados, visto que devem ser liberados dinamicamente em instantes arbitr√°rios durante a execu√ß√£o.
 
-%Sistemas de execuÁ„o din‚micos s„o mais complexos que sistemas baseados em pilhas, pois exigem o acompanhamento das referÍncias durante a execuÁ„o e gerÍncia autom·tica de memÛria.
+%Sistemas de execu√ß√£o din√¢micos s√£o mais complexos que sistemas baseados em pilhas, pois exigem o acompanhamento das refer√™ncias durante a execu√ß√£o e ger√™ncia autom√°tica de mem√≥ria.
 
 
-\section{CaracterÌsticas de sistemas para coleta de lixo}
-A primeira linguagem a liberar memÛria automaticamente foi \texttt{Lisp} em 1958. Atualmente, muitas linguagens de alto nÌvel oferecem coleta de lixo sem a participaÁ„o ou mesmo sem o conhecimento do programador. Algumas implementaÁıes importantes incluem \texttt{Java}, \texttt{Perl}, \texttt{Haskell}, \texttt{Python}, \texttt{Prolog} e \texttt{Smalltalk}. Aho \cite{bib:aho:comp} cita algumas consideraÁıes no projeto de um sistema coletor de lixo:
+\section{Caracter√≠sticas de sistemas para coleta de lixo}
+A primeira linguagem a liberar mem√≥ria automaticamente foi \texttt{Lisp} em 1958. Atualmente, muitas linguagens de alto n√≠vel oferecem coleta de lixo sem a participa√ß√£o ou mesmo sem o conhecimento do programador. Algumas implementa√ß√µes importantes incluem \texttt{Java}, \texttt{Perl}, \texttt{Haskell}, \texttt{Python}, \texttt{Prolog} e \texttt{Smalltalk}. Aho \cite{bib:aho:comp} cita algumas considera√ß√µes no projeto de um sistema coletor de lixo:
 
 \begin{itemize}
-\item Tempo de execuÁ„o: È importante que o tempo de execuÁ„o da coleta de lixo n„o aumente significativamente o tempo total de execuÁ„o da aplicaÁ„o. Uma vez que o coletor deve manipular muitos dados, a eficiÍncia no acesso a memÛria do sistema computacional È bastante relevante;
+\item Tempo de execu√ß√£o: √© importante que o tempo de execu√ß√£o da coleta de lixo n√£o aumente significativamente o tempo total de execu√ß√£o da aplica√ß√£o. Uma vez que o coletor deve manipular muitos dados, a efici√™ncia no acesso a mem√≥ria do sistema computacional √© bastante relevante;
 
-\item Aproveitamento de espaÁo: È importante que a coleta de lixo evite fragmentaÁ„o e use com eficiÍncia a memÛria disponÌvel;
+\item Aproveitamento de espa√ßo: √© importante que a coleta de lixo evite fragmenta√ß√£o e use com efici√™ncia a mem√≥ria dispon√≠vel;
 
-\item Tempos de pausa: estratÈgias \textit{stop-the-world}, onde sistema de execuÁ„o da linguagem interrompe a execuÁ„o do programa principal em favor da realizaÁ„o da coleta de lixo, s„o conhecidas por causarem pausas repentinas no programa. Consequentemente, È importante que os tempos de pausa sejam minimizados;
+\item Tempos de pausa: estrat√©gias \textit{stop-the-world}, onde sistema de execu√ß√£o da linguagem interrompe a execu√ß√£o do programa principal em favor da realiza√ß√£o da coleta de lixo, s√£o conhecidas por causarem pausas repentinas no programa. Consequentemente, √© importante que os tempos de pausa sejam minimizados;
 
-\item Localidade do programa: n„o se pode avaliar um algoritmo coletor de lixo somente pelo tempo de execuÁ„o. Coletores de lixo reposicionam dados, influenciando na localidade dos objetos do programa escrito pelo usu·rio da linguagem e nos dados da memÛria cache.
+\item Localidade do programa: n√£o se pode avaliar um algoritmo coletor de lixo somente pelo tempo de execu√ß√£o. Coletores de lixo reposicionam dados, influenciando na localidade dos objetos do programa escrito pelo usu√°rio da linguagem e nos dados da mem√≥ria cache.
 \end{itemize}
 
 
-\section{EstratÈgias para coleta de lixo aplicadas na \texttt{pFun}} \label{sec:gcpfun}
-A linguagem \texttt{pFun} possui duas estratÈgias \textit{stop-the-world} de coleta de lixo implementadas: coleta de cÛpia de dois espaÁos \cite{bib:dubois:pfun} e coleta baseada em geraÁıes utilizando o algoritmo \textit{mark-and-compact} para coleta da geraÁ„o antiga \cite{bib:beloni}. Estas estratÈgias s„o detalhadas nas prÛximas seÁıes.
+\section{Estrat√©gias para coleta de lixo aplicadas na \texttt{pFun}} \label{sec:gcpfun}
+A linguagem \texttt{pFun} possui duas estrat√©gias \textit{stop-the-world} de coleta de lixo implementadas: coleta de c√≥pia de dois espa√ßos \cite{bib:dubois:pfun} e coleta baseada em gera√ß√µes utilizando o algoritmo \textit{mark-and-compact} para coleta da gera√ß√£o antiga \cite{bib:beloni}. Estas estrat√©gias s√£o detalhadas nas pr√≥ximas se√ß√µes.
 
-\subsection{Coleta de cÛpia de dois espaÁos} \label{sec:twospace}
-Este algoritmo divide a \textit{heap} em duas regiıes, uma ativa (onde os objetos novos ser„o alocados) e outra inativa, ou auxiliar \cite{bib:samsom:gengc}. Quando a coleta È iniciada, a porÁ„o ativa atua como uma regi„o de origem, onde busca-se os objetos referenciados diretamente pelo conjunto-raiz do programa \texttt{pFun} (pilha de execuÁ„o e tarefas remotas), ent„o apenas os objetos vivos s„o copiados para a porÁ„o inativa (regi„o de destino) da {\it heap}.
+\subsection{Coleta de c√≥pia de dois espa√ßos} \label{sec:twospace}
+Este algoritmo divide a \textit{heap} em duas regi√µes, uma ativa (onde os objetos novos ser√£o alocados) e outra inativa, ou auxiliar \cite{bib:samsom:gengc}. Quando a coleta √© iniciada, a por√ß√£o ativa atua como uma regi√£o de origem, onde busca-se os objetos referenciados diretamente pelo conjunto-raiz do programa \texttt{pFun} (pilha de execu√ß√£o e tarefas remotas), ent√£o apenas os objetos vivos s√£o copiados para a por√ß√£o inativa (regi√£o de destino) da {\it heap}.
 
-O fluxograma da Figura \ref{fig:copyflow} apresenta, resumidamente, o funcionamento da coleta de cÛpia de dois espaÁos. Primeiramente, percorre-se o conjunto-raiz do programa, copiando suas referÍncias diretas para a regi„o de destino atravÈs de um processo chamado {\it evacuate}.
+O fluxograma da Figura \ref{fig:copyflow} apresenta, resumidamente, o funcionamento da coleta de c√≥pia de dois espa√ßos. Primeiramente, percorre-se o conjunto-raiz do programa, copiando suas refer√™ncias diretas para a regi√£o de destino atrav√©s de um processo chamado {\it evacuate}.
 
-Neste fluxograma, as vari·veis {\tt tospace} e {\tt tstop} indicam, respectivamente, o inÌcio da regi„o de destino e o topo desta regi„o, que vai sendo incrementado a medida que novos objetos v„o sendo copiados. O passo seguinte È efetuar uma busca em extens„o por todos os objetos j· copiados ({\it scavenge}), visando copiar tambÈm suas referÍncias ou atualiz·-las, no caso de j· estarem na regi„o de destino. Para tal, uma vari·vel auxiliar {\tt walk} comeÁa a percorrer os objetos j· copiados a partir do inÌcio regi„o de destino, se o objeto possi referÍncias a outros objetos, deve-se aplicar um {\it evacuate} em cada uma dessas referÍncias. Por fim, ocorre um teste para verificar se {\tt walk} percorreu todos objetos da regi„o de destino; atualiza-se o novo topo da {\it heap}; e a regi„o inativa torna-se ativa para a prÛxima coleta e vice-versa.
+Neste fluxograma, as vari√°veis {\tt tospace} e {\tt tstop} indicam, respectivamente, o in√≠cio da regi√£o de destino e o topo desta regi√£o, que vai sendo incrementado a medida que novos objetos v√£o sendo copiados. O passo seguinte √© efetuar uma busca em extens√£o por todos os objetos j√° copiados ({\it scavenge}), visando copiar tamb√©m suas refer√™ncias ou atualiz√°-las, no caso de j√° estarem na regi√£o de destino. Para tal, uma vari√°vel auxiliar {\tt walk} come√ßa a percorrer os objetos j√° copiados a partir do in√≠cio regi√£o de destino, se o objeto possi refer√™ncias a outros objetos, deve-se aplicar um {\it evacuate} em cada uma dessas refer√™ncias. Por fim, ocorre um teste para verificar se {\tt walk} percorreu todos objetos da regi√£o de destino; atualiza-se o novo topo da {\it heap}; e a regi√£o inativa torna-se ativa para a pr√≥xima coleta e vice-versa.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=.45\textwidth]{images/copy_flow.png}
-\caption{Fluxograma referente a coleta de cÛpia de dois espaÁos.}
+\caption{Fluxograma referente a coleta de c√≥pia de dois espa√ßos.}
 \label{fig:copyflow}
 \end{figure}
 
 %\lstinputlisting[language=C, label=src:twospace,
-%								 caption=ImplementaÁ„o da coleta de cÛpia de dois espaÁos.]
+%								 caption=Implementa√ß√£o da coleta de c√≥pia de dois espa√ßos.]
 %								 {codes/twospace.c}
 
-A Figura \ref{fig:twospacefull} mostra o estado da regi„o ativa da \textit{heap} quando est· no limite da capacidade, percebe-se que muitos objetos, como $O_{16}, O_{11}$ e $O_{12}$ n„o est„o acessÌveis atravÈs do conjunto-raiz ou mesmo indiretamente por outro objeto, portanto n„o s„o considerados vivos. A Figura \ref{fig:twospacecol} ilustra os objetos sobreviventes que foram copiados para a regi„o inativa. Percebe-se que o conjunto-raiz agora aponta para a regi„o antes inativa, que se tornou ativa ao final do processo.
+A Figura \ref{fig:twospacefull} mostra o estado da regi√£o ativa da \textit{heap} quando est√° no limite da capacidade, percebe-se que muitos objetos, como $O_{16}, O_{11}$ e $O_{12}$ n√£o est√£o acess√≠veis atrav√©s do conjunto-raiz ou mesmo indiretamente por outro objeto, portanto n√£o s√£o considerados vivos. A Figura \ref{fig:twospacecol} ilustra os objetos sobreviventes que foram copiados para a regi√£o inativa. Percebe-se que o conjunto-raiz agora aponta para a regi√£o antes inativa, que se tornou ativa ao final do processo.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.55]{images/twospace_full.png}
-\caption{Regi„o ativa lotada: antes da coleta de lixo \cite{bib:marcos}.}
+\caption{Regi√£o ativa lotada: antes da coleta de lixo \cite{bib:marcos}.}
 \label{fig:twospacefull}
 \end{figure}
 
-Segundo \cite{bib:marcos}, a coleta de cÛpia È uma boa opÁ„o quanto a velocidade em tempo de execuÁ„o, mas È preciso que a disponibilidade de memÛria n„o seja escassa, visto que esta aproveita apenas metade da memÛria disponÌvel. %Apesar de n„o ser o mais indicado, 
-A coleta de cÛpia foi escolhida para ser paralelizada neste projeto, principalmente por sua relativa simplicidade da implementaÁ„o sequencial e por ser muito utilizada na recuperaÁ„o de memÛria das geraÁıes jovens em um esquema de geraÁıes.
+Segundo \cite{bib:marcos}, a coleta de c√≥pia √© uma boa op√ß√£o quanto a velocidade em tempo de execu√ß√£o, mas √© preciso que a disponibilidade de mem√≥ria n√£o seja escassa, visto que esta aproveita apenas metade da mem√≥ria dispon√≠vel. %Apesar de n√£o ser o mais indicado, 
+A coleta de c√≥pia foi escolhida para ser paralelizada neste projeto, principalmente por sua relativa simplicidade da implementa√ß√£o sequencial e por ser muito utilizada na recupera√ß√£o de mem√≥ria das gera√ß√µes jovens em um esquema de gera√ß√µes.
 
-%Outra caracterÌstica importante deste algoritmo È que o sistema de execuÁ„o da linguagem interrompe a execuÁ„o do programa principal em favor da realizaÁ„o da coleta de lixo de dois espaÁos.
+%Outra caracter√≠stica importante deste algoritmo √© que o sistema de execu√ß√£o da linguagem interrompe a execu√ß√£o do programa principal em favor da realiza√ß√£o da coleta de lixo de dois espa√ßos.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.55]{images/twospace_collected.png}
-\caption{Nova regi„o ativa contendo os sobreviventes \cite{bib:marcos}.}
+\caption{Nova regi√£o ativa contendo os sobreviventes \cite{bib:marcos}.}
 \label{fig:twospacecol}
 \end{figure}
 
-\subsection{Coleta baseada em geraÁıes utilizando \textit{mark-and-compact}} \label{sec:gen}
-De acordo com os Jones e Lins \cite{bib:lins:gc}, a maioria dos objetos alocados tornam-se inalcanÁ·veis com pouco tempo de vida, o que chamamos de {\bf hipÛtese de geraÁıes}. A coleta de lixo baseada em geraÁıes faz a recuperaÁ„o da memÛria de forma mais eficiente e com menos interrupÁıes, pois concentra seus esforÁos em coletar aqueles objetos mais propÌcios a se tornarem lixo: os mais jovens.
+\subsection{Coleta baseada em gera√ß√µes utilizando \textit{mark-and-compact}} \label{sec:gen}
+De acordo com os Jones e Lins \cite{bib:lins:gc}, a maioria dos objetos alocados tornam-se inalcan√ß√°veis com pouco tempo de vida, o que chamamos de {\bf hip√≥tese de gera√ß√µes}. A coleta de lixo baseada em gera√ß√µes faz a recupera√ß√£o da mem√≥ria de forma mais eficiente e com menos interrup√ß√µes, pois concentra seus esfor√ßos em coletar aqueles objetos mais prop√≠cios a se tornarem lixo: os mais jovens.
 
-O algoritmo de geraÁıes separa os objetos por tempo de vida, formando as geraÁıes, de modo que os espaÁos de alocaÁ„o para as geraÁıes jovens sejam menores se comparados a ·rea reservada para as geraÁıes antigas. Diferentes geraÁıes s„o coletadas em diferentes frequÍncias, onde as geraÁıes mais jovens s„o coletadas mais frequentemente (coletas minorit·rias) e as geraÁıes mais antigas s„o coletadas com menor frequÍncia (coletas majorit·rias) \cite{bib:lins:gc}.
+O algoritmo de gera√ß√µes separa os objetos por tempo de vida, formando as gera√ß√µes, de modo que os espa√ßos de aloca√ß√£o para as gera√ß√µes jovens sejam menores se comparados a √°rea reservada para as gera√ß√µes antigas. Diferentes gera√ß√µes s√£o coletadas em diferentes frequ√™ncias, onde as gera√ß√µes mais jovens s√£o coletadas mais frequentemente (coletas minorit√°rias) e as gera√ß√µes mais antigas s√£o coletadas com menor frequ√™ncia (coletas majorit√°rias) \cite{bib:lins:gc}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.55]{images/gen_young.png}
-\caption{GeraÁ„o jovem lotada \cite{bib:marcos}.}
+\caption{Gera√ß√£o jovem lotada \cite{bib:marcos}.}
 \label{fig:genyoung}
 \end{figure}
 
-No esquema com apenas duas geraÁıes, os objetos s„o alocados primeiramente na geraÁ„o jovem e, quando esta estiver lotada, os objetos vivos ($O_6$, $O_7$ e $O_{11}$ da Figura \ref{fig:genyoung}) s„o promovidos para a geraÁ„o mais antiga. O processo de promoÁ„o nada mais È do que uma cÛpia (ao estilo cÛpia de dois espaÁos) de objetos da geraÁ„o jovem para a geraÁ„o antiga, que vai acumulando os sobreviventes de v·rias coletas ‡ geraÁ„o jovem, como mostra a Figura \ref{fig:genpromot}. A coleta da geraÁ„o antiga ocorre quando esta estiver lotada, utilizando o algoritmo \textit{mark-and-compact}. O fluxograma da Figura \ref{fig:markcompflow} È um resumo deste algoritmo.%; o mesmo È dividido em trÍs fases:  %sua implementaÁ„o È mostrada no Programa \ref{src:markcomp}.
+No esquema com apenas duas gera√ß√µes, os objetos s√£o alocados primeiramente na gera√ß√£o jovem e, quando esta estiver lotada, os objetos vivos ($O_6$, $O_7$ e $O_{11}$ da Figura \ref{fig:genyoung}) s√£o promovidos para a gera√ß√£o mais antiga. O processo de promo√ß√£o nada mais √© do que uma c√≥pia (ao estilo c√≥pia de dois espa√ßos) de objetos da gera√ß√£o jovem para a gera√ß√£o antiga, que vai acumulando os sobreviventes de v√°rias coletas √† gera√ß√£o jovem, como mostra a Figura \ref{fig:genpromot}. A coleta da gera√ß√£o antiga ocorre quando esta estiver lotada, utilizando o algoritmo \textit{mark-and-compact}. O fluxograma da Figura \ref{fig:markcompflow} √© um resumo deste algoritmo.%; o mesmo √© dividido em tr√™s fases:  %sua implementa√ß√£o √© mostrada no Programa \ref{src:markcomp}.
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.55]{images/gen_promot.png}
-\caption{Objetos sobreviventes promovidos a geraÁ„o antiga \cite{bib:marcos}.}
+\caption{Objetos sobreviventes promovidos a gera√ß√£o antiga \cite{bib:marcos}.}
 \label{fig:genpromot}
 \end{figure}
 
 \pagebreak
 
 %\begin{itemize}
-%\item Marcar objetos alcanÁ·veis pelo programa e suas referÍncias recursivamente a partir do conjunto-raiz;
-%\item Realocar os objetos de forma a compactar a \textit{heap} e liberar espaÁo para futuras alocaÁıes;
-%\item Atualizar as referÍncias dos objetos sobreviventes;
+%\item Marcar objetos alcan√ß√°veis pelo programa e suas refer√™ncias recursivamente a partir do conjunto-raiz;
+%\item Realocar os objetos de forma a compactar a \textit{heap} e liberar espa√ßo para futuras aloca√ß√µes;
+%\item Atualizar as refer√™ncias dos objetos sobreviventes;
 %\end{itemize}
 
 %\lstinputlisting[language=C, label=src:markcomp,
-%								 caption=CompactaÁ„o da geraÁ„o antiga.]
+%								 caption=Compacta√ß√£o da gera√ß√£o antiga.]
 %								 {codes/mark-and-compact.c}
 
 \begin{figure}[h]
@@ -417,59 +417,59 @@ No esquema com apenas duas geraÁıes, os objetos s„o alocados primeiramente na ge
 \label{fig:markcompflow}
 \end{figure}
 
-O algoritmo {\it mark-and-compact} possui complexidade computacional $O(n)$, pois cada uma das fases percorre, no pior caso, todos os elementos da geraÁ„o antiga. Na coleta da geraÁ„o antiga, este algoritmo exige quantidade de memÛria do tamanho da ·rea a ser coletada, j· que deve-se armazenar os novos endereÁos de memÛria dos objetos realocados.
+O algoritmo {\it mark-and-compact} possui complexidade computacional $O(n)$, pois cada uma das fases percorre, no pior caso, todos os elementos da gera√ß√£o antiga. Na coleta da gera√ß√£o antiga, este algoritmo exige quantidade de mem√≥ria do tamanho da √°rea a ser coletada, j√° que deve-se armazenar os novos endere√ßos de mem√≥ria dos objetos realocados.
 
 
 %\chapter{Processamento paralelo revisitado} \label{sec:parproc}
-\chapter{ProgramaÁ„o de arquiteturas paralelas} \label{sec:parproc}
+\chapter{Programa√ß√£o de arquiteturas paralelas} \label{sec:parproc}
 
-\section{IntroduÁ„o}
-Um programa paralelo, ou concorrente, consiste basicamente de dois ou mais fluxos de execuÁ„o trabalhando juntos para resolver um problema. Os fluxos de execuÁ„o podem trocar informaÁıes atravÈs de vari·veis compartilhadas (seÁ„o \ref{sec:sharedmem}) ou envio de mensagens pela rede.
+\section{Introdu√ß√£o}
+Um programa paralelo, ou concorrente, consiste basicamente de dois ou mais fluxos de execu√ß√£o trabalhando juntos para resolver um problema. Os fluxos de execu√ß√£o podem trocar informa√ß√µes atrav√©s de vari√°veis compartilhadas (se√ß√£o \ref{sec:sharedmem}) ou envio de mensagens pela rede.
 
-Programas paralelos podem aumentar o desempenho em relaÁ„o a sua vers„o sequencial somente se executarem sobre uma arquitetura com v·rios processadores. Infelizmente, o aumento do n˙mero de unidades de processamento acaba por complicar o desenvolvimento de aplicaÁıes que tiram proveito dessas arquiteturas, tanto no gerenciamento da comunicaÁ„o entre os fluxos de execuÁ„o, mas sobretudo no particionamento dos problemas em v·rias unidades ativas, como aborda a seÁ„o \ref{sec:workdistrib}. %Dependendo da natureza do programa e do tipo de arquitetura paralela escolhida, o {\it overhead} acrescentado em sua paralelizaÁ„o acaba tornando-o mais lento, pois utiliza-se mais memÛria para o gerenciamento
+Programas paralelos podem aumentar o desempenho em rela√ß√£o a sua vers√£o sequencial somente se executarem sobre uma arquitetura com v√°rios processadores. Infelizmente, o aumento do n√∫mero de unidades de processamento acaba por complicar o desenvolvimento de aplica√ß√µes que tiram proveito dessas arquiteturas, tanto no gerenciamento da comunica√ß√£o entre os fluxos de execu√ß√£o, mas sobretudo no particionamento dos problemas em v√°rias unidades ativas, como aborda a se√ß√£o \ref{sec:workdistrib}. %Dependendo da natureza do programa e do tipo de arquitetura paralela escolhida, o {\it overhead} acrescentado em sua paraleliza√ß√£o acaba tornando-o mais lento, pois utiliza-se mais mem√≥ria para o gerenciamento
 
-\section{Arquiteturas de memÛria compartilhada} \label{sec:sharedmem}
-Neste tipo de arquitetura, m˙ltiplos nodos de processamento tÍm acesso a uma memÛria comum (compartilhada) por meio de um barramento de interconex„o implÌcito, como mostra a Figura \ref{fig:smp}, por este motivo, s„o tambÈm conhecidos por multiprocessadores. Adenauer Yamin \cite{bib:adenauer} cita alguns aspectos positivos do uso de arquiteturas de memÛria compartilhada:
+\section{Arquiteturas de mem√≥ria compartilhada} \label{sec:sharedmem}
+Neste tipo de arquitetura, m√∫ltiplos nodos de processamento t√™m acesso a uma mem√≥ria comum (compartilhada) por meio de um barramento de interconex√£o impl√≠cito, como mostra a Figura \ref{fig:smp}, por este motivo, s√£o tamb√©m conhecidos por multiprocessadores. Adenauer Yamin \cite{bib:adenauer} cita alguns aspectos positivos do uso de arquiteturas de mem√≥ria compartilhada:
 
 \begin{itemize}
-\item A localidade do processador È abstraÌda nestas arquiteturas: a comunicaÁ„o È feita atravÈs de leitura e escrita em vari·veis compartilhadas com alto desempenho;
+\item A localidade do processador √© abstra√≠da nestas arquiteturas: a comunica√ß√£o √© feita atrav√©s de leitura e escrita em vari√°veis compartilhadas com alto desempenho;
 
-\item Semelhante ‡s arquiteturas de ˙nico processador: ambiente de programaÁ„o e sistema operacional operam de forma semelhante nas arquiteturas multiprocessadas e de ˙nico processador;
+\item Semelhante √†s arquiteturas de √∫nico processador: ambiente de programa√ß√£o e sistema operacional operam de forma semelhante nas arquiteturas multiprocessadas e de √∫nico processador;
 
-\item Compartilhamento de recursos: a memÛria comum facilita o compartilhamento de dados, recursos de entrada/saÌda e memÛria virtual.
+\item Compartilhamento de recursos: a mem√≥ria comum facilita o compartilhamento de dados, recursos de entrada/sa√≠da e mem√≥ria virtual.
 \end{itemize}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=1]{images/smp1.jpg}
-\caption{Arquitetura genÈrica de processadores com memÛria compartilhada \cite{bib:crad}.}
+\caption{Arquitetura gen√©rica de processadores com mem√≥ria compartilhada \cite{bib:crad}.}
 \label{fig:smp}
 \end{figure}
 
-Existem diversas formas de interligar processadores e memÛrias na definiÁ„o de uma arquitetura paralela. Cada estratÈgia de interconex„o tem implicaÁıes diretas em aspectos operacionais: desempenho, escalabilidade, custo de fabricaÁ„o, entre outros. %As subseÁıes a seguir, baseadas no texto de CÈsar De Rose \cite{bib:crad}, apresentam trÍs arquiteturas de processadores de memÛria compartilhada.
+Existem diversas formas de interligar processadores e mem√≥rias na defini√ß√£o de uma arquitetura paralela. Cada estrat√©gia de interconex√£o tem implica√ß√µes diretas em aspectos operacionais: desempenho, escalabilidade, custo de fabrica√ß√£o, entre outros. %As subse√ß√µes a seguir, baseadas no texto de C√©sar De Rose \cite{bib:crad}, apresentam tr√™s arquiteturas de processadores de mem√≥ria compartilhada.
 
-%\subsection{Acesso uniforme ‡ memÛria}
-%Nessas arquiteturas, a memÛria È centralizada, encontrando-se ‡ mesma dist‚ncia de todos os processadores, consequentemente a latÍncia de acesso ‡ memÛria È a mesma (uniforme) para todos os processadores do sistema, como mostra a Figura \ref{fig:uma}.
+%\subsection{Acesso uniforme √† mem√≥ria}
+%Nessas arquiteturas, a mem√≥ria √© centralizada, encontrando-se √† mesma dist√¢ncia de todos os processadores, consequentemente a lat√™ncia de acesso √† mem√≥ria √© a mesma (uniforme) para todos os processadores do sistema, como mostra a Figura \ref{fig:uma}.
 
 %\begin{figure}[htbp]
 %\centering
 %\includegraphics[scale=1.3]{images/uma.jpg}
-%\caption{Arquitetura de processadores com acesso uniforme ‡ memÛria \cite{bib:crad}.}
+%\caption{Arquitetura de processadores com acesso uniforme √† mem√≥ria \cite{bib:crad}.}
 %\label{fig:uma}
 %\end{figure}
 
-%\subsection{Acesso n„o uniforme ‡ memÛria}
-%A memÛria È distribuÌda, implementada como m˙ltiplos mÛdulos que s„o associados cada um a seu respectivo processador. Entretanto o espaÁo de endereÁamento È ˙nico e qualquer processador pode endereÁar toda memÛria do sistema. Se o endereÁo solicitado pelo processador encontrar-se no mÛdulo de memÛria local, o tempo de acesso ser· menor se comparado ao tempo de acesso ‡ memÛria de outro processador. Por isso, a latÍncia de acesso ‡ memÛria n„o È uniforme, como mostra a Figura \ref{fig:numa}.
+%\subsection{Acesso n√£o uniforme √† mem√≥ria}
+%A mem√≥ria √© distribu√≠da, implementada como m√∫ltiplos m√≥dulos que s√£o associados cada um a seu respectivo processador. Entretanto o espa√ßo de endere√ßamento √© √∫nico e qualquer processador pode endere√ßar toda mem√≥ria do sistema. Se o endere√ßo solicitado pelo processador encontrar-se no m√≥dulo de mem√≥ria local, o tempo de acesso ser√° menor se comparado ao tempo de acesso √† mem√≥ria de outro processador. Por isso, a lat√™ncia de acesso √† mem√≥ria n√£o √© uniforme, como mostra a Figura \ref{fig:numa}.
 
 %\begin{figure}[htbp]
 %\centering
 %\includegraphics[scale=1.3]{images/numa.jpg}
-%\caption{Arquitetura de processadores com acesso n„o uniforme ‡ memÛria \cite{bib:crad}.}
+%\caption{Arquitetura de processadores com acesso n√£o uniforme √† mem√≥ria \cite{bib:crad}.}
 %\label{fig:numa}
 %\end{figure}
 
 \subsection{Processadores multicore}
-Esta arquitetura se popularizou devido ‡ sua adoÁ„o nos computadores pessoais comerciais. … dita simÈtrica porque todos processadores tÍm igual acesso ao barramento e ‡ memÛria. Na Figura \ref{fig:smp2}, percebe-se que o barramento que d· acesso ‡ memÛria È ˙nico, ou seja, ocorre um chaveamento que decide qual processador (P/C) acessar· ao mÛdulo de memÛria (MC) em um dado instante.
+Esta arquitetura se popularizou devido √† sua ado√ß√£o nos computadores pessoais comerciais. √â dita sim√©trica porque todos processadores t√™m igual acesso ao barramento e √† mem√≥ria. Na Figura \ref{fig:smp2}, percebe-se que o barramento que d√° acesso √† mem√≥ria √© √∫nico, ou seja, ocorre um chaveamento que decide qual processador (P/C) acessar√° ao m√≥dulo de mem√≥ria (MC) em um dado instante.
 
 
 \begin{figure}[htbp]
@@ -479,74 +479,74 @@ Esta arquitetura se popularizou devido ‡ sua adoÁ„o nos computadores pessoais co
 \label{fig:smp2}
 \end{figure}
 
-Um processador multicore combina dois ou mais n˙cleos de processamento independentes em um circuito integrado. Os n˙cleos de processamento podem ou n„o compartilhar a memÛria cache, compartilham as interconexıes com o restante do sistema e implementam as mesmas otimizaÁıes existentes em processadores simples, como {\it pipelining}, {\it multi-threading}, etc. … importante observar, ainda na Figura \ref{fig:smp2}, que a memÛria cache est· representada juntamente com o respectivo processador, antes do barramento de interconex„o, visto que, em uma arquitetura com muitos processadores, v·rias tentativas de acesso ‡ memÛria principal podem ocasionar um gargalo.
+Um processador multicore combina dois ou mais n√∫cleos de processamento independentes em um circuito integrado. Os n√∫cleos de processamento podem ou n√£o compartilhar a mem√≥ria cache, compartilham as interconex√µes com o restante do sistema e implementam as mesmas otimiza√ß√µes existentes em processadores simples, como {\it pipelining}, {\it multi-threading}, etc. √â importante observar, ainda na Figura \ref{fig:smp2}, que a mem√≥ria cache est√° representada juntamente com o respectivo processador, antes do barramento de interconex√£o, visto que, em uma arquitetura com muitos processadores, v√°rias tentativas de acesso √† mem√≥ria principal podem ocasionar um gargalo.
 
-\subsection{MemÛrias cache e coerÍncia} \label{sec:cache}
-Nas arquiteturas modernas, acesso a dados na memÛria principal pode levar centenas de ciclos, fazendo com que processadores percam muito tempo apenas esperando por requisiÁıes ‡ memÛria principal \cite{bib:herlihy:theart}. Este gargalo È reduzido com o uso de memÛrias cache: pequenas memÛrias que situam-se logicamente entre o processador e a memÛria principal, portanto mais r·pidas. Quando um processador precisa de um valor de um certo endereÁo de memÛria, primeiramente este deve verificar se o valor j· est· na cache. Se encontrado, n„o ser· necess·rio acessar a memÛria principal, neste caso tem-se o chamado cache {\it hit}; caso contr·rio, tem-se um cache {\it miss} e o valor ter· de ser buscado na memÛria principal.
+\subsection{Mem√≥rias cache e coer√™ncia} \label{sec:cache}
+Nas arquiteturas modernas, acesso a dados na mem√≥ria principal pode levar centenas de ciclos, fazendo com que processadores percam muito tempo apenas esperando por requisi√ß√µes √† mem√≥ria principal \cite{bib:herlihy:theart}. Este gargalo √© reduzido com o uso de mem√≥rias cache: pequenas mem√≥rias que situam-se logicamente entre o processador e a mem√≥ria principal, portanto mais r√°pidas. Quando um processador precisa de um valor de um certo endere√ßo de mem√≥ria, primeiramente este deve verificar se o valor j√° est√° na cache. Se encontrado, n√£o ser√° necess√°rio acessar a mem√≥ria principal, neste caso tem-se o chamado cache {\it hit}; caso contr√°rio, tem-se um cache {\it miss} e o valor ter√° de ser buscado na mem√≥ria principal.
 
-Segundo \cite{bib:herlihy:theart}, caches demonstram-se efetivas devido ao alto grau de localidade que apresentam os processadores: uma vez que um valor foi modificado na memÛria, È bastante prov·vel que o respectivo endereÁo seja requisitado brevemente. AlÈm disso, sabe-se que os endereÁos prÛximos ‡quele modificado tambÈm possuem grande probabilidade de acesso (no uso de {\it arrays}, por exemplo), por isso, as memÛrias cache n„o sÛ armazenam o conte˙do do endereÁo de memÛria requisitado, mas tambÈm dos seus vizinhos. MemÛrias cache s„o mais caras de produzir, portanto muito menores que as memÛrias principais, consequentemente apenas uma pequena fraÁ„o da memÛria principal poder· estar em cache.
+Segundo \cite{bib:herlihy:theart}, caches demonstram-se efetivas devido ao alto grau de localidade que apresentam os processadores: uma vez que um valor foi modificado na mem√≥ria, √© bastante prov√°vel que o respectivo endere√ßo seja requisitado brevemente. Al√©m disso, sabe-se que os endere√ßos pr√≥ximos √†quele modificado tamb√©m possuem grande probabilidade de acesso (no uso de {\it arrays}, por exemplo), por isso, as mem√≥rias cache n√£o s√≥ armazenam o conte√∫do do endere√ßo de mem√≥ria requisitado, mas tamb√©m dos seus vizinhos. Mem√≥rias cache s√£o mais caras de produzir, portanto muito menores que as mem√≥rias principais, consequentemente apenas uma pequena fra√ß√£o da mem√≥ria principal poder√° estar em cache.
 
-%\subsubsection{CoerÍncia}
-Em um sistema multiprocessado, contenÁıes de memÛria ocorrem quando processadores leem ou modificam endereÁos de memÛria situados na cache de outro processador. Se dois processadores apenas fazem a leitura de uma ·rea de memÛria, ambos podem armazenar este dado em suas caches. Entretanto, quando um processador tenta atualizar o conte˙do de um endereÁo armazenado na sua respectiva cache, uma eventual leitura de outro processador ao mesmo endereÁo em cache deve ser invalidada. Este È o chamado problema de coerÍncia de cache: deve haver uma consistÍncia dos dados armazenados em diferentes caches que faÁam referÍncia ‡ uma memÛria comum, como mostra a Figura \ref{fig:cache}. Existem v·rios protocolos para tratar este problema, mas o importante È projetar o sistema de forma a evitar contenÁıes geradas por dados espalhados em m˙ltiplas caches.
-% Herlihy e Shavit comentam que existem v·rios protocolos para tratar este problema, e afirmam que o mais importante È projetar o sistema de forma a evitar contenÁıes geradas por dados espalhados em m˙ltiplas caches.
+%\subsubsection{Coer√™ncia}
+Em um sistema multiprocessado, conten√ß√µes de mem√≥ria ocorrem quando processadores leem ou modificam endere√ßos de mem√≥ria situados na cache de outro processador. Se dois processadores apenas fazem a leitura de uma √°rea de mem√≥ria, ambos podem armazenar este dado em suas caches. Entretanto, quando um processador tenta atualizar o conte√∫do de um endere√ßo armazenado na sua respectiva cache, uma eventual leitura de outro processador ao mesmo endere√ßo em cache deve ser invalidada. Este √© o chamado problema de coer√™ncia de cache: deve haver uma consist√™ncia dos dados armazenados em diferentes caches que fa√ßam refer√™ncia √† uma mem√≥ria comum, como mostra a Figura \ref{fig:cache}. Existem v√°rios protocolos para tratar este problema, mas o importante √© projetar o sistema de forma a evitar conten√ß√µes geradas por dados espalhados em m√∫ltiplas caches.
+% Herlihy e Shavit comentam que existem v√°rios protocolos para tratar este problema, e afirmam que o mais importante √© projetar o sistema de forma a evitar conten√ß√µes geradas por dados espalhados em m√∫ltiplas caches.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.86]{images/Cache_Coherency.png}
-\caption{CoerÍncia de cache.}
+\caption{Coer√™ncia de cache.}
 \label{fig:cache}
 \end{figure}
 
 
 \section{\textit{Threads}} \label{sec:threads}
-Chama-se \textit{thread} cada um dos fluxos de execuÁ„o em que pode-se dividir um programa. Diferentes \textit{threads} criadas por um mesmo processo\footnote{Inst‚ncia de um programa em execuÁ„o.} compartilham recursos atravÈs de vari·veis globais. O uso de \textit{threads} È um dos mecanismos empregados para tirar proveito do paralelismo inerente a determinados problemas, mas cabe ao programador saber organizar seu programa para que este obtenha o melhor desempenho possÌvel. Existem muitos problemas que possuem partes que n„o s„o facilmente paraleliz·veis devido ao acesso concorrente aos dados e a necessidade de coordernaÁ„o de \textit{threads}.
+Chama-se \textit{thread} cada um dos fluxos de execu√ß√£o em que pode-se dividir um programa. Diferentes \textit{threads} criadas por um mesmo processo\footnote{Inst√¢ncia de um programa em execu√ß√£o.} compartilham recursos atrav√©s de vari√°veis globais. O uso de \textit{threads} √© um dos mecanismos empregados para tirar proveito do paralelismo inerente a determinados problemas, mas cabe ao programador saber organizar seu programa para que este obtenha o melhor desempenho poss√≠vel. Existem muitos problemas que possuem partes que n√£o s√£o facilmente paraleliz√°veis devido ao acesso concorrente aos dados e a necessidade de coorderna√ß√£o de \textit{threads}.
 
-O autor Mark Mitchell \cite{bib:advlinprog} explica que, no padr„o POSIX, {\it threads} s„o escalonadas de forma assÌncrona pelo n˙cleo do sistema operacional, de modo que a ordem de execuÁ„o das instruÁıes È imprevisÌvel. Cada {\it thread} pode criar outras {\it threads} e cada uma delas, apesar de executarem no mesmo processo, podem estar em diferentes pontos do programa a qualquer momento. Novas {\it threads} s„o criadas compartilhando o mesmo espaÁo de memÛria, descritores de arquivos e outros recursos do sistema. Portanto, pode-se fazer a intercomunicaÁ„o entre {\it threads} utilizando vari·veis globais. Todavia, {\it threads} possuem sua prÛpria pilha de execuÁ„o, possibilitando a execuÁ„o e retorno de funÁıes da mesma maneira que qualquer programa.
+O autor Mark Mitchell \cite{bib:advlinprog} explica que, no padr√£o POSIX, {\it threads} s√£o escalonadas de forma ass√≠ncrona pelo n√∫cleo do sistema operacional, de modo que a ordem de execu√ß√£o das instru√ß√µes √© imprevis√≠vel. Cada {\it thread} pode criar outras {\it threads} e cada uma delas, apesar de executarem no mesmo processo, podem estar em diferentes pontos do programa a qualquer momento. Novas {\it threads} s√£o criadas compartilhando o mesmo espa√ßo de mem√≥ria, descritores de arquivos e outros recursos do sistema. Portanto, pode-se fazer a intercomunica√ß√£o entre {\it threads} utilizando vari√°veis globais. Todavia, {\it threads} possuem sua pr√≥pria pilha de execu√ß√£o, possibilitando a execu√ß√£o e retorno de fun√ß√µes da mesma maneira que qualquer programa.
 
-Se a arquitetura n„o dispıe de v·rios processadores, um programa {\it multi-thread}\footnote{Processos com mais de uma \textit{thread} em execuÁ„o.} executar· virtualmente de forma paralela atravÈs da multiplexaÁ„o de tempo por parte do sistema operacional: ser„o oferecidas v·rias fatias de tempo para execuÁ„o de cada \textit{thread}. Em arquiteturas multicore, diferentes \textit{threads} podem executar, literalmente ao mesmo tempo, em diferentes processadores, desde que estejam disponÌveis.
+Se a arquitetura n√£o disp√µe de v√°rios processadores, um programa {\it multi-thread}\footnote{Processos com mais de uma \textit{thread} em execu√ß√£o.} executar√° virtualmente de forma paralela atrav√©s da multiplexa√ß√£o de tempo por parte do sistema operacional: ser√£o oferecidas v√°rias fatias de tempo para execu√ß√£o de cada \textit{thread}. Em arquiteturas multicore, diferentes \textit{threads} podem executar, literalmente ao mesmo tempo, em diferentes processadores, desde que estejam dispon√≠veis.
 
-\section{SincronizaÁ„o e seÁıes crÌticas}
-Segundo \cite{bib:advlinprog}, o maior benefÌcio dos programas {\it multi-thread} È tambÈm o maior causador de erros: dados compartilhados que podem ser acessados ao mesmo tempo. Se uma {\it thread} est· atualizando uma estrutura de dados no exato momento que outra {\it thread} acessa a mesma estrutura, um erro poder· ocorrer. Estas situaÁıes s„o chamadas condiÁıes de corrida (do InglÍs, {\it race conditions}): quando uma {\it thread} concorre com outra no acesso ou modificaÁ„o da mesma ·rea de memÛria.
+\section{Sincroniza√ß√£o e se√ß√µes cr√≠ticas}
+Segundo \cite{bib:advlinprog}, o maior benef√≠cio dos programas {\it multi-thread} √© tamb√©m o maior causador de erros: dados compartilhados que podem ser acessados ao mesmo tempo. Se uma {\it thread} est√° atualizando uma estrutura de dados no exato momento que outra {\it thread} acessa a mesma estrutura, um erro poder√° ocorrer. Estas situa√ß√µes s√£o chamadas condi√ß√µes de corrida (do Ingl√™s, {\it race conditions}): quando uma {\it thread} concorre com outra no acesso ou modifica√ß√£o da mesma √°rea de mem√≥ria.
 
-\subsection{CondiÁıes de corrida}
-Para exemplificar o problema gerado por uma condiÁ„o de corrida, os autores \cite{bib:advlinprog} utilizam uma fila de tarefas {\tt tasks}, que È representada por uma lista encadeada do tipo {\tt struct task}, como mostra o Programa \ref{src:taskque}. Na repetiÁ„o das linhas 12 a 18, primeiramente ocorre a verificaÁ„o se a fila ainda possui elementos, depois o primeiro elemento È retirado e a tarefa correspondente È executada, e assim por diante atÈ o ponteiro {\tt tasks} se tornar nulo.
+\subsection{Condi√ß√µes de corrida}
+Para exemplificar o problema gerado por uma condi√ß√£o de corrida, os autores \cite{bib:advlinprog} utilizam uma fila de tarefas {\tt tasks}, que √© representada por uma lista encadeada do tipo {\tt struct task}, como mostra o Programa \ref{src:taskque}. Na repeti√ß√£o das linhas 12 a 18, primeiramente ocorre a verifica√ß√£o se a fila ainda possui elementos, depois o primeiro elemento √© retirado e a tarefa correspondente √© executada, e assim por diante at√© o ponteiro {\tt tasks} se tornar nulo.
 
-Supondo que duas {\it threads} terminem o procedimento {\tt execute()} ao mesmo tempo, deixando apenas um elemento na fila de tarefas. Uma {\it thread (A)} entra na repetiÁ„o da linha 12 e obtÈm o primeiro elemento da fila. Neste mesmo perÌodo, outra {\it thread (B)} È escalonada pelo sistema operacional, procede a execuÁ„o da ˙ltima tarefa e termina a funÁ„o. Quando {\it thread (A)} retornar, ao executar a linha 15 -- tentativa de acesso ‡ vari·vel membro {\tt tasks->next} -- causar· um acesso indevido ‡ memÛria. Esta condiÁ„o de corrida n„o vai ocorrer todas as vezes que o programa for executado, mas pode ocorrer e deve ser evitada. \vskip 10pt
+Supondo que duas {\it threads} terminem o procedimento {\tt execute()} ao mesmo tempo, deixando apenas um elemento na fila de tarefas. Uma {\it thread (A)} entra na repeti√ß√£o da linha 12 e obt√©m o primeiro elemento da fila. Neste mesmo per√≠odo, outra {\it thread (B)} √© escalonada pelo sistema operacional, procede a execu√ß√£o da √∫ltima tarefa e termina a fun√ß√£o. Quando {\it thread (A)} retornar, ao executar a linha 15 -- tentativa de acesso √† vari√°vel membro {\tt tasks->next} -- causar√° um acesso indevido √† mem√≥ria. Esta condi√ß√£o de corrida n√£o vai ocorrer todas as vezes que o programa for executado, mas pode ocorrer e deve ser evitada. \vskip 10pt
 
 \lstinputlisting[language=C, label=src:taskque,
-								 caption=FunÁ„o de {\it thread} para executar tarefas de uma lista encadeada.]
+								 caption=Fun√ß√£o de {\it thread} para executar tarefas de uma lista encadeada.]
 								 {codes/task_queue.c}
 
 %USE Adv. lINUX  prog book examples
 % see chap 4.4 adv linux prog
 
 \subsection{\textit{Mutexes}}
-Uma das maneiras de evitar o problema abordado na seÁ„o anterior È a demarcaÁ„o da seÁ„o crÌtica do programa com exclus„o m˙tua, ou seja, determinado trecho de cÛdigo deve ser executado atomicamente: uma operaÁ„o indivisÌvel e ininterrupta. Uma vez que iniciam, operaÁıes atÙmicas n„o s„o interrompidas atÈ que terminem. POSIX {\it threads} oferece exclus„o m˙tua atravÈs dos {\it mutexes (MUtual EXclusion locks)}.
+Uma das maneiras de evitar o problema abordado na se√ß√£o anterior √© a demarca√ß√£o da se√ß√£o cr√≠tica do programa com exclus√£o m√∫tua, ou seja, determinado trecho de c√≥digo deve ser executado atomicamente: uma opera√ß√£o indivis√≠vel e ininterrupta. Uma vez que iniciam, opera√ß√µes at√¥micas n√£o s√£o interrompidas at√© que terminem. POSIX {\it threads} oferece exclus√£o m√∫tua atrav√©s dos {\it mutexes (MUtual EXclusion locks)}.
 
-No problema do Programa \ref{src:taskque}, deve-se fazer com que cada {\it thread} possa acessar a fila de tarefas por vez -- guardar o primeiro elemento e removÍ-lo da fila  -- sÛ ent„o executar a tarefa. O Programa \ref{src:taskmutex} \cite{bib:advlinprog} mostra uma fila de tarefas protegida contra v·rios acessos simult‚neos de {\it threads}. 
+No problema do Programa \ref{src:taskque}, deve-se fazer com que cada {\it thread} possa acessar a fila de tarefas por vez -- guardar o primeiro elemento e remov√™-lo da fila  -- s√≥ ent√£o executar a tarefa. O Programa \ref{src:taskmutex} \cite{bib:advlinprog} mostra uma fila de tarefas protegida contra v√°rios acessos simult√¢neos de {\it threads}. 
 
-De acordo com o Programa \ref{src:taskmutex}, um {\it mutex} È criado declarando-se uma vari·vel do tipo {\tt pthread\_mutex\_t}, como mostra a linha 8, onde o mesmo tambÈm È inicializado. Um {\it mutex} È um tipo de ``tranca'' que apenas uma {\it thread} pode trancar por vez. Ao entrar na seÁ„o crÌtica, uma {\it thread (A)} tranca o {\it mutex} (linha 15). Outras {\it threads} que tentarem executar a mesma linha ficar„o bloqueadas atÈ que a {\it thread (A)} libere o {\it mutex} (linha 22). SÛ ent„o uma das outras {\it threads} poder· trancar o {\it mutex} para executar a seÁ„o crÌtica.
+De acordo com o Programa \ref{src:taskmutex}, um {\it mutex} √© criado declarando-se uma vari√°vel do tipo {\tt pthread\_mutex\_t}, como mostra a linha 8, onde o mesmo tamb√©m √© inicializado. Um {\it mutex} √© um tipo de ``tranca'' que apenas uma {\it thread} pode trancar por vez. Ao entrar na se√ß√£o cr√≠tica, uma {\it thread (A)} tranca o {\it mutex} (linha 15). Outras {\it threads} que tentarem executar a mesma linha ficar√£o bloqueadas at√© que a {\it thread (A)} libere o {\it mutex} (linha 22). S√≥ ent√£o uma das outras {\it threads} poder√° trancar o {\it mutex} para executar a se√ß√£o cr√≠tica.
 
-… importante observar que, apenas pelo fato de uma {\it thread} liberar o {\it mutex}, n„o implica que outra {\it thread} ter· acesso ‡ seÁ„o crÌtica imediatamente. O que determina o momento em que {\it threads} s„o executadas È o escalonador do sistema operacional, levando em consideraÁ„o o n˙mero de processadores disponÌveis, sua carga, entre outros.
+√â importante observar que, apenas pelo fato de uma {\it thread} liberar o {\it mutex}, n√£o implica que outra {\it thread} ter√° acesso √† se√ß√£o cr√≠tica imediatamente. O que determina o momento em que {\it threads} s√£o executadas √© o escalonador do sistema operacional, levando em considera√ß√£o o n√∫mero de processadores dispon√≠veis, sua carga, entre outros.
 
 \lstinputlisting[language=C, label=src:taskmutex,
 								 caption=Fila de tarefas com acesso limitado a uma {\it thread} por vez.]
 								 {codes/task_queue_mutex.c}
 
-SeÁıes crÌticas s„o determindadas pelo programador, ficando compreendidas entre chamadas ‡s funÁıes {\tt pthread\_mutex\_lock()}, para trancar o {\it mutex} e {\tt pthread\_mutex\_unlock()}, para destranc·-lo. Todos acessos ‡ fila compartilhada {\tt tasks} devem ser feitos dentro da seÁ„o crÌtica. Uma tarefa ({\tt next\_task}) È acessada fora desta regi„o depois de ter sido removida da fila, portanto, n„o mais acessÌvel a outras {\it threads}.
+Se√ß√µes cr√≠ticas s√£o determindadas pelo programador, ficando compreendidas entre chamadas √†s fun√ß√µes {\tt pthread\_mutex\_lock()}, para trancar o {\it mutex} e {\tt pthread\_mutex\_unlock()}, para destranc√°-lo. Todos acessos √† fila compartilhada {\tt tasks} devem ser feitos dentro da se√ß√£o cr√≠tica. Uma tarefa ({\tt next\_task}) √© acessada fora desta regi√£o depois de ter sido removida da fila, portanto, n√£o mais acess√≠vel a outras {\it threads}.
 
-\section{InstruÁ„o \textit{compare-and-swap}}
-Na coleta de lixo, o processo de tranferÍncia dos objetos vivos de uma regi„o para outra permite que mais de uma {\it thread} referencie o mesmo objeto, mas apenas uma {\it thread} deve copi·-lo, portanto È preciso verificar se o objeto em quest„o j· foi copiado. Para tal, esta implementaÁ„o faz uso da instruÁ„o {\it compare-and-swap} (CAS), conhecida como {\it cmpxchg (compare-and-exchange)} na arquitetura Intel x86. Esta instruÁ„o faz, atomicamente, a comparaÁ„o e, se necess·rio, a atualizaÁ„o de uma posiÁ„o de memÛria.
+\section{Instru√ß√£o \textit{compare-and-swap}}
+Na coleta de lixo, o processo de tranfer√™ncia dos objetos vivos de uma regi√£o para outra permite que mais de uma {\it thread} referencie o mesmo objeto, mas apenas uma {\it thread} deve copi√°-lo, portanto √© preciso verificar se o objeto em quest√£o j√° foi copiado. Para tal, esta implementa√ß√£o faz uso da instru√ß√£o {\it compare-and-swap} (CAS), conhecida como {\it cmpxchg (compare-and-exchange)} na arquitetura Intel x86. Esta instru√ß√£o faz, atomicamente, a compara√ß√£o e, se necess√°rio, a atualiza√ß√£o de uma posi√ß√£o de mem√≥ria.
 
-De acordo com o Programa \ref{src:cas}, a instruÁ„o CAS (rotina {\tt cmpxchg} da linha 9) recebe trÍs argumentos: uma referÍncia a uma posiÁ„o de memÛria {\tt mem}, o valor que se espera encontrar {\tt old} no conte˙do de {\tt mem} e um novo valor {\tt new} a ser atualizado em {\tt mem}. Se o valor contido em {\tt old} for igual ao conte˙do referenciado por {\tt mem}, CAS procede a cÛpia de {\tt new} em {\tt mem}. Caso contr·rio, {\tt old} diferente do valor referencioado por {\tt mem}, nada È feito.
+De acordo com o Programa \ref{src:cas}, a instru√ß√£o CAS (rotina {\tt cmpxchg} da linha 9) recebe tr√™s argumentos: uma refer√™ncia a uma posi√ß√£o de mem√≥ria {\tt mem}, o valor que se espera encontrar {\tt old} no conte√∫do de {\tt mem} e um novo valor {\tt new} a ser atualizado em {\tt mem}. Se o valor contido em {\tt old} for igual ao conte√∫do referenciado por {\tt mem}, CAS procede a c√≥pia de {\tt new} em {\tt mem}. Caso contr√°rio, {\tt old} diferente do valor referencioado por {\tt mem}, nada √© feito.
 
-O valor {\tt res} retornado pela rotina {\tt cmpxchg} contÈm o valor inicial apontado por {\tt mem} e, ao ser comparado ao valor {\tt old}, indica o sucesso ou falha da operaÁ„o. Se o Programa \ref{src:cas} executar a linha 10, significa que a operaÁ„o CAS foi realizada com sucesso, sendo que {\tt mem} agora referencia o mesmo valor de {\tt new}.
+O valor {\tt res} retornado pela rotina {\tt cmpxchg} cont√©m o valor inicial apontado por {\tt mem} e, ao ser comparado ao valor {\tt old}, indica o sucesso ou falha da opera√ß√£o. Se o Programa \ref{src:cas} executar a linha 10, significa que a opera√ß√£o CAS foi realizada com sucesso, sendo que {\tt mem} agora referencia o mesmo valor de {\tt new}.
 
 \lstinputlisting[language=C, label=src:cas,
-								 caption=Funcionamento da instruÁ„o CAS.]
+								 caption=Funcionamento da instru√ß√£o CAS.]
 								 {codes/cas.c}
 
-A partir da linha 15 (funÁ„o {\tt main()}), o Programa \ref{src:cas} faz com que {\tt mem} referencie uma ·rea de memÛria contendo o valor 777. ApÛs, duas {\it threads} s„o criadas, passando como ˙ltimo argumento, um valor qualquer, que ser· atribuÌdo a vari·vel {\tt old} na funÁ„o da thread (linha 6). Ao executar {\tt cmpxchg()}, a {\it thread} em que o teste {\tt old == *mem} for verdadeiro ter· sucesso, copiando {\tt old} para {\tt *mem}. A seguir, tem-se um exemplo de saÌda gerada pelo Programa \ref{src:cas}, onde s„o mostrados tambÈm os valores das vari·veis envolvidas na operaÁ„o CAS:
+A partir da linha 15 (fun√ß√£o {\tt main()}), o Programa \ref{src:cas} faz com que {\tt mem} referencie uma √°rea de mem√≥ria contendo o valor 777. Ap√≥s, duas {\it threads} s√£o criadas, passando como √∫ltimo argumento, um valor qualquer, que ser√° atribu√≠do a vari√°vel {\tt old} na fun√ß√£o da thread (linha 6). Ao executar {\tt cmpxchg()}, a {\it thread} em que o teste {\tt old == *mem} for verdadeiro ter√° sucesso, copiando {\tt old} para {\tt *mem}. A seguir, tem-se um exemplo de sa√≠da gerada pelo Programa \ref{src:cas}, onde s√£o mostrados tamb√©m os valores das vari√°veis envolvidas na opera√ß√£o CAS:
 \begin{verbatim}
 thread 16386 mem: 777, old: 555, new: 999
 thread 16386: CAS failed...
@@ -557,24 +557,24 @@ thread 32771: CAS sucess!
 thread 32771 mem: 999, old: 777, new: 999, res: 777
 \end{verbatim}
 
-Seguindo a estrutura proposta por Flood e Detlefs \cite{bib:flood:pargc}, CAS È utilizada na alocaÁ„o do espaÁo de memÛria para cada objeto na regi„o de destino. Se este j· possui uma cÛpia na referida regi„o, CAS falhar·, a cÛpia n„o ser· efetuada e o endereÁo do correspondente objeto j· copiado para a regi„o de destino deve ser referenciado pelo objeto em quest„o. CAS sucede quando o objeto ainda n„o possui cÛpia na regi„o de destino, procedendo a alocaÁ„o e sinalizaÁ„o do novo endereÁo do objeto. A seÁ„o \ref{sec:cas} mostra como CAS È aplicada neste projeto.
+Seguindo a estrutura proposta por Flood e Detlefs \cite{bib:flood:pargc}, CAS √© utilizada na aloca√ß√£o do espa√ßo de mem√≥ria para cada objeto na regi√£o de destino. Se este j√° possui uma c√≥pia na referida regi√£o, CAS falhar√°, a c√≥pia n√£o ser√° efetuada e o endere√ßo do correspondente objeto j√° copiado para a regi√£o de destino deve ser referenciado pelo objeto em quest√£o. CAS sucede quando o objeto ainda n√£o possui c√≥pia na regi√£o de destino, procedendo a aloca√ß√£o e sinaliza√ß√£o do novo endere√ßo do objeto. A se√ß√£o \ref{sec:cas} mostra como CAS √© aplicada neste projeto.
 
 
-\section{DistribuiÁ„o de tarefas} \label{sec:workdistrib}
-Sabe-se que alguns problemas podem ser facilmente projetados para execuÁ„o em paralelo. % atravÈs de \textit{threads}. 
-Herlihy \cite{bib:herlihy:theart} cita o exemplo de requisiÁıes que chegam em um servidor \textit{web}: a cada requisiÁ„o, o servidor pode apenas criar uma \textit{thread} para trat·-la enquanto continua esperando por outras requisiÁıes.
+\section{Distribui√ß√£o de tarefas} \label{sec:workdistrib}
+Sabe-se que alguns problemas podem ser facilmente projetados para execu√ß√£o em paralelo. % atrav√©s de \textit{threads}. 
+Herlihy \cite{bib:herlihy:theart} cita o exemplo de requisi√ß√µes que chegam em um servidor \textit{web}: a cada requisi√ß√£o, o servidor pode apenas criar uma \textit{thread} para trat√°-la enquanto continua esperando por outras requisi√ß√µes.
 
-Por outro lado, existem problemas que s„o inerentemente paraleliz·veis, mas n„o È simples tirar vantagem deste paralelismo. No caso da multiplicaÁ„o de matrizes, onde
-\begin{center} $c_{ij}=\sum\limits_{k=0}^{n-1}a_{ki}◊b_{jk}$ \end{center}
-se cada $c_{ij}$ for computado por uma nova \textit{thread}, a princÌpio parece uma boa soluÁ„o: o programa È altamente paralelo e n„o exige sincronizaÁ„o de {\it threads}. Mas, segundo Herlihy e Shavit \cite{bib:herlihy:theart}, deste modo o programa apresentar· bom desempenho apenas para pequenas matrizes, j· para grandes matrizes, a eficiÍncia ser· comprometida. Visto que criar, escalonar e destruir \textit{threads} possui consider·vel custo computacional, despachar v·rias \textit{threads} com curto tempo de vida (poucas computaÁıes) È uma maneira bastante ineficiente de projetar uma computaÁ„o paralela. Uma maneira mais eficiente de organizar tais programas È mantendo um conjunto de {\it threads} ({\it thread pool}) de longa duraÁ„o, onde cada {\it thread} busca tarefas para executar atÈ que n„o existam mais tarefas. 
+Por outro lado, existem problemas que s√£o inerentemente paraleliz√°veis, mas n√£o √© simples tirar vantagem deste paralelismo. No caso da multiplica√ß√£o de matrizes, onde
+\begin{center} $c_{ij}=\sum\limits_{k=0}^{n-1}a_{ki}√ób_{jk}$ \end{center}
+se cada $c_{ij}$ for computado por uma nova \textit{thread}, a princ√≠pio parece uma boa solu√ß√£o: o programa √© altamente paralelo e n√£o exige sincroniza√ß√£o de {\it threads}. Mas, segundo Herlihy e Shavit \cite{bib:herlihy:theart}, deste modo o programa apresentar√° bom desempenho apenas para pequenas matrizes, j√° para grandes matrizes, a efici√™ncia ser√° comprometida. Visto que criar, escalonar e destruir \textit{threads} possui consider√°vel custo computacional, despachar v√°rias \textit{threads} com curto tempo de vida (poucas computa√ß√µes) √© uma maneira bastante ineficiente de projetar uma computa√ß√£o paralela. Uma maneira mais eficiente de organizar tais programas √© mantendo um conjunto de {\it threads} ({\it thread pool}) de longa dura√ß√£o, onde cada {\it thread} busca tarefas para executar at√© que n√£o existam mais tarefas. 
 
 
 %\section{Lei de Amdahl}
-%Segundo Maurice Herlihy \cite{bib:herlihy:theart}, o ideal seria que, aumentando em $n$ o n˙mero de processadores de uma arquitetura, o poder de computaÁ„o deveria aumentar, proporcionalmente, $n$ vezes. Entretanto, isto n„o acontece, pois aplicaÁıes computacionais n„o s„o efetivamente paraleliz·veis sem o custo adicional com a comunicaÁ„o entre os processadores envolvidos e a coordernaÁ„o de {\it threads}.
+%Segundo Maurice Herlihy \cite{bib:herlihy:theart}, o ideal seria que, aumentando em $n$ o n√∫mero de processadores de uma arquitetura, o poder de computa√ß√£o deveria aumentar, proporcionalmente, $n$ vezes. Entretanto, isto n√£o acontece, pois aplica√ß√µes computacionais n√£o s√£o efetivamente paraleliz√°veis sem o custo adicional com a comunica√ß√£o entre os processadores envolvidos e a coorderna√ß√£o de {\it threads}.
 
-%A lei de Amdahl enuncia que o ganho m·ximo de uma aplicaÁ„o paralela È limitado pelo quanto desta tarefa tiver de ser executada sequencialmente. {\it Speedup} È a taxa de tempo que uma tarefa demora para executar em apenas um processador versus o tempo de execuÁ„o da mesma tarefa em $n$ processadores. Esta lei determina o m·ximo {\it speedup} $S$ que se pode conseguir com $n$ processadores trabalhando juntos, sendo $p$ a porÁ„o da tarefa que pode ser executada em paralelo.
+%A lei de Amdahl enuncia que o ganho m√°ximo de uma aplica√ß√£o paralela √© limitado pelo quanto desta tarefa tiver de ser executada sequencialmente. {\it Speedup} √© a taxa de tempo que uma tarefa demora para executar em apenas um processador versus o tempo de execu√ß√£o da mesma tarefa em $n$ processadores. Esta lei determina o m√°ximo {\it speedup} $S$ que se pode conseguir com $n$ processadores trabalhando juntos, sendo $p$ a por√ß√£o da tarefa que pode ser executada em paralelo.
 
-%Assumindo que uma tarefa demora $T_s$ unidades de tempo em um ˙nico processador; com $n$ processadores, a parte paralela executa em $p/n$ e a parte sequencial leva $T_s-p$ unidades de tempo, o tempo de computaÁ„o em paralelo segue a fÛrmula:
+%Assumindo que uma tarefa demora $T_s$ unidades de tempo em um √∫nico processador; com $n$ processadores, a parte paralela executa em $p/n$ e a parte sequencial leva $T_s-p$ unidades de tempo, o tempo de computa√ß√£o em paralelo segue a f√≥rmula:
 %$$T_p=T_s-p+\dfrac{p}{n}$$
 %e, segundo a lei de Amdahl, o {\it speedup}:
 %$$S=\dfrac{T_s}{T_p}$$
@@ -582,26 +582,26 @@ se cada $c_{ij}$ for computado por uma nova \textit{thread}, a princÌpio parece 
 
 \chapter{Estrutura do sistema para coleta de lixo paralela} \label{ch:paralgo}
 
-\section{IntroduÁ„o}
-A crescente popularizaÁ„o dos computadores pessoais multicore oferece grande poder computacional que, muitas vezes, acaba n„o sendo aproveitado, tanto pelo usu·rio final como por parte dos programadores. As linguagens de programaÁ„o modernas cada vez mais oferecem recursos de forma transparente aos desenvolvedores, entre eles est· o gerenciamento autom·tico de memÛria.
+\section{Introdu√ß√£o}
+A crescente populariza√ß√£o dos computadores pessoais multicore oferece grande poder computacional que, muitas vezes, acaba n√£o sendo aproveitado, tanto pelo usu√°rio final como por parte dos programadores. As linguagens de programa√ß√£o modernas cada vez mais oferecem recursos de forma transparente aos desenvolvedores, entre eles est√° o gerenciamento autom√°tico de mem√≥ria.
 
-No caso das linguagens funcionais, onde a preocupaÁ„o È com a definiÁ„o matem·tica das funÁıes, coleta de lixo È uma exigÍncia: o programador n„o deve ter o conhecimento do uso da memÛria por parte de seu programa, muito menos o n˙mero de n˙cleos de processamento disponÌveis. O que espera-se de uma boa linguagem de programaÁ„o funcional È que esta aproveite ao m·ximo os recursos computacionais sem exigir do programador conhecimento sobre o {\it hardware} disponÌvel. %RECURSOS DIDPONÕVEIS
+No caso das linguagens funcionais, onde a preocupa√ß√£o √© com a defini√ß√£o matem√°tica das fun√ß√µes, coleta de lixo √© uma exig√™ncia: o programador n√£o deve ter o conhecimento do uso da mem√≥ria por parte de seu programa, muito menos o n√∫mero de n√∫cleos de processamento dispon√≠veis. O que espera-se de uma boa linguagem de programa√ß√£o funcional √© que esta aproveite ao m√°ximo os recursos computacionais sem exigir do programador conhecimento sobre o {\it hardware} dispon√≠vel. %RECURSOS DIDPON√çVEIS
 
 Segundo \cite{bib:lins:gc}, um sistema para coleta de lixo deve obedecer as seguintes propriedades:
 \begin{itemize} % SEE PAGE 304 RAFAEL LINS
-\item AbrangÍncia: um coletor de lixo deve ser capaz de coletar todos objetos vivos e descartar o lixo;
+\item Abrang√™ncia: um coletor de lixo deve ser capaz de coletar todos objetos vivos e descartar o lixo;
 
 \item Corretude: apenas objetos considerados lixo devem ser descartados;
 
-\item Efic·cia: os {\it overheads} de tempo gasto e espaÁo ocupado em memÛria devem ser aceit·veis.
+\item Efic√°cia: os {\it overheads} de tempo gasto e espa√ßo ocupado em mem√≥ria devem ser aceit√°veis.
 \end{itemize}
 
-Sabe-se que uma estratÈgia baseada em geraÁıes utiliza a coleta de cÛpia na promoÁ„o dos objetos vivos, onde a regi„o de origem È a prÛpria geraÁ„o jovem, enquanto a geraÁ„o antiga assume o papel de regi„o de destino (seÁ„o \ref{sec:gen}). Uma vez que a coleta de cÛpia de dois espaÁos È um dos componentes da coleta baseada em geraÁıes e que recuperaÁıes de memÛria na geraÁ„o jovem s„o realizadas com muito mais frequÍncia, È conveniente que as coletas minorit·rias sejam otimizadas. Para que programas {\tt pFun} possam tirar proveito das arquiteturas multicore, cada vez mais acessÌveis no mercado, este projeto visa a paralelizaÁ„o de uma estratÈgia de coleta de lixo, a coleta de cÛpia de dois espaÁos. Tem-se por objetivo diminuir o gargalo da coleta de lixo e, por consequÍncia, reduzir o tempo total de execuÁ„o de programas na m·quina virtual {\tt pFun}, alÈm de contribuir com futuros trabalhos sobre a paralelizaÁ„o da coleta de lixo baseada em geraÁıes. %, numa proporÁ„o ASSUSTADORAMENTE ESMAGADORA
+Sabe-se que uma estrat√©gia baseada em gera√ß√µes utiliza a coleta de c√≥pia na promo√ß√£o dos objetos vivos, onde a regi√£o de origem √© a pr√≥pria gera√ß√£o jovem, enquanto a gera√ß√£o antiga assume o papel de regi√£o de destino (se√ß√£o \ref{sec:gen}). Uma vez que a coleta de c√≥pia de dois espa√ßos √© um dos componentes da coleta baseada em gera√ß√µes e que recupera√ß√µes de mem√≥ria na gera√ß√£o jovem s√£o realizadas com muito mais frequ√™ncia, √© conveniente que as coletas minorit√°rias sejam otimizadas. Para que programas {\tt pFun} possam tirar proveito das arquiteturas multicore, cada vez mais acess√≠veis no mercado, este projeto visa a paraleliza√ß√£o de uma estrat√©gia de coleta de lixo, a coleta de c√≥pia de dois espa√ßos. Tem-se por objetivo diminuir o gargalo da coleta de lixo e, por consequ√™ncia, reduzir o tempo total de execu√ß√£o de programas na m√°quina virtual {\tt pFun}, al√©m de contribuir com futuros trabalhos sobre a paraleliza√ß√£o da coleta de lixo baseada em gera√ß√µes. %, numa propor√ß√£o ASSUSTADORAMENTE ESMAGADORA
 
-%Para que programas {\tt pFun} possam tirar proveito das arquiteturas multicore, cada vez mais acessÌveis no mercado, este projeto visa a paralelizaÁ„o de uma estratÈgia de coleta de lixo, a coleta de cÛpia de dois espaÁos. Pretende-se verificar sua viabilidade e benefÌcios em relaÁ„o ‡s implementaÁıes sequenciais. Tem-se por objetivo diminuir o gargalo da coleta de lixo e, por consequÍncia, reduzir o tempo total de execuÁ„o de programas na m·quina virtual {\tt pFun}.
+%Para que programas {\tt pFun} possam tirar proveito das arquiteturas multicore, cada vez mais acess√≠veis no mercado, este projeto visa a paraleliza√ß√£o de uma estrat√©gia de coleta de lixo, a coleta de c√≥pia de dois espa√ßos. Pretende-se verificar sua viabilidade e benef√≠cios em rela√ß√£o √†s implementa√ß√µes sequenciais. Tem-se por objetivo diminuir o gargalo da coleta de lixo e, por consequ√™ncia, reduzir o tempo total de execu√ß√£o de programas na m√°quina virtual {\tt pFun}.
 
-\section{ParalelizaÁ„o da coleta de lixo}
-Com base na proposta de Christine Flood e David Detlefs \cite{bib:flood:pargc}, as prÛximas seÁıes apresentam a estrutura do sistema para coleta de lixo a ser utilizada neste projeto. … importante ressaltar que esta implementaÁ„o n„o constitui uma abordagem pr·tica, mas sim um ensaio, servindo apenas como um modelo para estudos relacionados a coleta de lixo paralela, seus desafios e comportamento, n„o estando completamente funcional. %WHAT A MESS!
+\section{Paraleliza√ß√£o da coleta de lixo}
+Com base na proposta de Christine Flood e David Detlefs \cite{bib:flood:pargc}, as pr√≥ximas se√ß√µes apresentam a estrutura do sistema para coleta de lixo a ser utilizada neste projeto. √â importante ressaltar que esta implementa√ß√£o n√£o constitui uma abordagem pr√°tica, mas sim um ensaio, servindo apenas como um modelo para estudos relacionados a coleta de lixo paralela, seus desafios e comportamento, n√£o estando completamente funcional. %WHAT A MESS!
 
 \begin{figure}[h]
 \centering
@@ -610,127 +610,127 @@ Com base na proposta de Christine Flood e David Detlefs \cite{bib:flood:pargc}, 
 \label{fig:flow1}
 \end{figure}
 
-A Figura \ref{fig:flow1} È um fluxograma que representa a coleta de cÛpia de dois espaÁos, juntamente com o mecanismo de paralelizaÁ„o. Com base no conte˙do apresentado na seÁ„o \ref{sec:twospace}, primeiramente deve-se trocar a funÁ„o de cada regi„o: regi„o ativa passa a ser a regi„o da {\it heap} onde os objetos s„o buscados, enquanto a regi„o inativa passa a ser a regi„o de destino dos objetos sobreviventes, portanto a futura reg„o ativa. Ent„o, os objetos do conjunto-raiz s„o distribuÌdos entre as {\it deques} de cada {\it thread}. O conector GC da Figura \ref{fig:flow1} faz referÍncia ‡ rotina de coleta de lixo propriamente dita, cujos detalhes s„o abordados nas prÛximas subseÁıes e na Figura \ref{fig:flow2}.%mostrada no fluxograma da Figura \ref{fig:flow2} e detalhada na seÁ„o \ref{sec:parcopy}.
+A Figura \ref{fig:flow1} √© um fluxograma que representa a coleta de c√≥pia de dois espa√ßos, juntamente com o mecanismo de paraleliza√ß√£o. Com base no conte√∫do apresentado na se√ß√£o \ref{sec:twospace}, primeiramente deve-se trocar a fun√ß√£o de cada regi√£o: regi√£o ativa passa a ser a regi√£o da {\it heap} onde os objetos s√£o buscados, enquanto a regi√£o inativa passa a ser a regi√£o de destino dos objetos sobreviventes, portanto a futura reg√£o ativa. Ent√£o, os objetos do conjunto-raiz s√£o distribu√≠dos entre as {\it deques} de cada {\it thread}. O conector GC da Figura \ref{fig:flow1} faz refer√™ncia √† rotina de coleta de lixo propriamente dita, cujos detalhes s√£o abordados nas pr√≥ximas subse√ß√µes e na Figura \ref{fig:flow2}.%mostrada no fluxograma da Figura \ref{fig:flow2} e detalhada na se√ß√£o \ref{sec:parcopy}.
 
 
 \subsection{Particionamento das tarefas} \label{sec:overp}
-Quando o trabalho a ser feito puder ser particionado em tarefas idÍnticas e igualmente distribuÌdas em todos processadores disponÌveis, consegue-se terminar o trabalho no menor tempo possÌvel. Este È o chamado particionamento est·tico.
+Quando o trabalho a ser feito puder ser particionado em tarefas id√™nticas e igualmente distribu√≠das em todos processadores dispon√≠veis, consegue-se terminar o trabalho no menor tempo poss√≠vel. Este √© o chamado particionamento est√°tico.
 
-Entretanto, a maioria das tarefas n„o pode ser dividida em partes (ou subtarefas) de tamanho previsÌvel, como traÁar o grafo dos objetos sobreviventes de um programa, devido a grande variabilidade da forma deste grafo. Neste caso, deve-se utilizar alguma forma de particionamento din‚mico de tarefas.
+Entretanto, a maioria das tarefas n√£o pode ser dividida em partes (ou subtarefas) de tamanho previs√≠vel, como tra√ßar o grafo dos objetos sobreviventes de um programa, devido a grande variabilidade da forma deste grafo. Neste caso, deve-se utilizar alguma forma de particionamento din√¢mico de tarefas.
 
-Os autores utilizam uma tÈcnica de particionamento din‚mico chamada \textit{overpartition}: consiste em quebrar tarefas em muitas outras subtarefas, de modo que cada \textit{thread} dinamicamente adquira uma subtarefa por vez. No contexto deste projeto, as subtarefas s„o cada uma das referÍncias para objetos em memÛria a serem coletados. S„o apresentados dois motivos para utilizaÁ„o da tÈcnica \textit{overpartition}:
+Os autores utilizam uma t√©cnica de particionamento din√¢mico chamada \textit{overpartition}: consiste em quebrar tarefas em muitas outras subtarefas, de modo que cada \textit{thread} dinamicamente adquira uma subtarefa por vez. No contexto deste projeto, as subtarefas s√£o cada uma das refer√™ncias para objetos em mem√≥ria a serem coletados. S√£o apresentados dois motivos para utiliza√ß√£o da t√©cnica \textit{overpartition}:
 
 \begin{enumerate}
-\item O n˙mero de processadores disponÌveis para executar as tarefas de um programa È imprevisÌvel, pois outros processos podem estar ocupando unidades de processamento. O tempo de computaÁ„o pode atÈ dobrar se um dos processadores que j· esteja ocupado receber outra tarefa. Com \textit{overpartition}, uma tarefa que n„o pode ser alocada exclusivamente em um processador ser· dividida em v·rias subtarefas que, ent„o, ser„o computadas por outros processadores.
+\item O n√∫mero de processadores dispon√≠veis para executar as tarefas de um programa √© imprevis√≠vel, pois outros processos podem estar ocupando unidades de processamento. O tempo de computa√ß√£o pode at√© dobrar se um dos processadores que j√° esteja ocupado receber outra tarefa. Com \textit{overpartition}, uma tarefa que n√£o pode ser alocada exclusivamente em um processador ser√° dividida em v√°rias subtarefas que, ent√£o, ser√£o computadas por outros processadores.
 
-\item Uma vez que n„o se sabe quantas computaÁıes ser„o necess·rias para executar determinada tarefa, com o particionamento est·tico, corre-se o risco de processadores ficarem mais carregados que outros. A tÈcnica {\it overpartition} diminui este risco, pois oferece v·rias pequenas tarefas aos processadores, fazendo com que fiquem sempre em atividade.
+\item Uma vez que n√£o se sabe quantas computa√ß√µes ser√£o necess√°rias para executar determinada tarefa, com o particionamento est√°tico, corre-se o risco de processadores ficarem mais carregados que outros. A t√©cnica {\it overpartition} diminui este risco, pois oferece v√°rias pequenas tarefas aos processadores, fazendo com que fiquem sempre em atividade.
 \end{enumerate}
 
 \subsection{\textit{Work-stealing}} \label{sec:worksteal}
-Visando o balanceamento din‚mico de carga, este projeto adota a abordagem \textit{work-stealing} apresentada por Arora \cite{bib:arora:worksteal}, com devidas adaptaÁıes. Utiliza-se um \textit{thread pool} em que cada \textit{thread} executa tarefas retiradas de uma {\it deque}\footnote{\textit{Double Ended QUEue}: fila que permite a retirada de elementos dos dois extremos.} local -- cada {\it thread} possui uma {\it deque} prÛpria, aqui referida por {\it deque} local. Quando a {\it deque} local fica vazia, a \textit{thread} correspondente deve ``roubar'' (do InglÍs, \textit{steal}) tarefas de outra {\it deque} escolhida de forma aleatÛria.
+Visando o balanceamento din√¢mico de carga, este projeto adota a abordagem \textit{work-stealing} apresentada por Arora \cite{bib:arora:worksteal}, com devidas adapta√ß√µes. Utiliza-se um \textit{thread pool} em que cada \textit{thread} executa tarefas retiradas de uma {\it deque}\footnote{\textit{Double Ended QUEue}: fila que permite a retirada de elementos dos dois extremos.} local -- cada {\it thread} possui uma {\it deque} pr√≥pria, aqui referida por {\it deque} local. Quando a {\it deque} local fica vazia, a \textit{thread} correspondente deve ``roubar'' (do Ingl√™s, \textit{steal}) tarefas de outra {\it deque} escolhida de forma aleat√≥ria.
 
-Para obter uma tarefa, a \textit{thread} retira o primeiro elemento da {\it deque} local utilizando o mÈtodo \texttt{pop\_bottom}. Durante a realizaÁ„o de uma tarefa, o objeto que est· sendo coletado pode conter referÍncias a outros objetos, que devem ser adicionadas a {\it deque} local utilizando \texttt{push\_bottom}. AtÈ que torne-se vazia, a \textit{thread} acessa sua {\it deque} ao estilo de uma pilha (LIFO). Quando a {\it deque} correspondente estiver vazia, a \textit{thread} deve escolher aleatoriamente uma {\it deque} vÌtima para roubar uma tarefa atravÈs do mÈtodo \texttt{pop\_top}. Se a vÌtima tambÈm encontra-se vazia, a \textit{thread} deve escolher, de forma aleatÛria, outra {\it deque} para roubar tarefas. O mÈtodo \texttt{pop\_top} acessa a {\it deque} ao estilo FIFO.
+Para obter uma tarefa, a \textit{thread} retira o primeiro elemento da {\it deque} local utilizando o m√©todo \texttt{pop\_bottom}. Durante a realiza√ß√£o de uma tarefa, o objeto que est√° sendo coletado pode conter refer√™ncias a outros objetos, que devem ser adicionadas a {\it deque} local utilizando \texttt{push\_bottom}. At√© que torne-se vazia, a \textit{thread} acessa sua {\it deque} ao estilo de uma pilha (LIFO). Quando a {\it deque} correspondente estiver vazia, a \textit{thread} deve escolher aleatoriamente uma {\it deque} v√≠tima para roubar uma tarefa atrav√©s do m√©todo \texttt{pop\_top}. Se a v√≠tima tamb√©m encontra-se vazia, a \textit{thread} deve escolher, de forma aleat√≥ria, outra {\it deque} para roubar tarefas. O m√©todo \texttt{pop\_top} acessa a {\it deque} ao estilo FIFO.
 
-Cada {\it thread} executa o algoritmo mostrado no fluxograma da Figura \ref{fig:flow2}, que consiste em desenfilar objetos de sua prÛpria {\it deque}, copi·-lo para a regi„o de destino, atÈ que a {\it deque} correspondente fique vazia. Ent„o, a {\it thread} deve tentar roubar objetos de alguma outra {\it thread} insistentemente, em ordem aleatÛria, atÈ que todas tenham sido alvejadas. Se o roubo sucedeu, deve-se continuar o processo de coleta, caso contr·rio, esta {\it thread} deve terminar, pois n„o h· mais elementos em sua {\it deque} local, tampuco em outras {\it deques}.
+Cada {\it thread} executa o algoritmo mostrado no fluxograma da Figura \ref{fig:flow2}, que consiste em desenfilar objetos de sua pr√≥pria {\it deque}, copi√°-lo para a regi√£o de destino, at√© que a {\it deque} correspondente fique vazia. Ent√£o, a {\it thread} deve tentar roubar objetos de alguma outra {\it thread} insistentemente, em ordem aleat√≥ria, at√© que todas tenham sido alvejadas. Se o roubo sucedeu, deve-se continuar o processo de coleta, caso contr√°rio, esta {\it thread} deve terminar, pois n√£o h√° mais elementos em sua {\it deque} local, tampuco em outras {\it deques}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{images/gc_flow22.png}
-\caption{Fluxograma representando a execuÁ„o das {\it threads}.}
+\caption{Fluxograma representando a execu√ß√£o das {\it threads}.}
 \label{fig:flow2}
 \end{figure}
 
 
-%\texttt{push\_bottom} e \texttt{pop\_bottom} s„o operaÁıes locais que, em geral, n„o exigem estratÈgias de sincronizaÁ„o de \textit{threads}. SincronizaÁ„o È necess·ria apenas quando se quer retirar o ˙ltimo elemento da {\it deque} local ou quando uma \textit{thread} precisa roubar um elemento de outra {\it deque}.
+%\texttt{push\_bottom} e \texttt{pop\_bottom} s√£o opera√ß√µes locais que, em geral, n√£o exigem estrat√©gias de sincroniza√ß√£o de \textit{threads}. Sincroniza√ß√£o √© necess√°ria apenas quando se quer retirar o √∫ltimo elemento da {\it deque} local ou quando uma \textit{thread} precisa roubar um elemento de outra {\it deque}.
 
-%Nesta implementaÁ„o, todas operaÁıes sobre as {\it deques} s„o feitas sob {\it mutexes}, ou seja, s„o bloqueantes. A quantidade de memÛria utilizada por cada {\it deque} È fixa, 
+%Nesta implementa√ß√£o, todas opera√ß√µes sobre as {\it deques} s√£o feitas sob {\it mutexes}, ou seja, s√£o bloqueantes. A quantidade de mem√≥ria utilizada por cada {\it deque} √© fixa, 
 
 %\lstinputlisting[language=C, label=src:deque,
-%								 caption=ImplementaÁ„o.]
+%								 caption=Implementa√ß√£o.]
 %								 {codes/deque.c}
 
 
 
-\subsection{Balanceamento din‚mico de carga} \label{sec:balanc}
-Uma vez que v·rias \textit{threads} ir„o trabalhar na coleta de lixo, È importante que nenhuma delas fique sobrecarregada, enquanto outras est„o desocupadas. Flood e Detlefs \cite{bib:flood:pargc} afirmam que dividir igualmente os objetos-raiz entre as \textit{threads} n„o evita a desproporcionalidade, pois alguns objetos-raiz podem originar grandes estruturas de dados, enquanto outros referenciam vari·veis simples, como inteiros.
-O balanceamento din‚mico de carga È feito utilizando a abordagem mostrada na seÁ„o anterior: cada \textit{thread} obtÈm uma tarefa -- referÍncia a um objeto que deve ser coletado -- de sua {\it deque} local ou de outra {\it deque} e, durante a coleta, enfila todas as referÍncias deste objeto em sua prÛpria {\it deque} e assim por diante.
+\subsection{Balanceamento din√¢mico de carga} \label{sec:balanc}
+Uma vez que v√°rias \textit{threads} ir√£o trabalhar na coleta de lixo, √© importante que nenhuma delas fique sobrecarregada, enquanto outras est√£o desocupadas. Flood e Detlefs \cite{bib:flood:pargc} afirmam que dividir igualmente os objetos-raiz entre as \textit{threads} n√£o evita a desproporcionalidade, pois alguns objetos-raiz podem originar grandes estruturas de dados, enquanto outros referenciam vari√°veis simples, como inteiros.
+O balanceamento din√¢mico de carga √© feito utilizando a abordagem mostrada na se√ß√£o anterior: cada \textit{thread} obt√©m uma tarefa -- refer√™ncia a um objeto que deve ser coletado -- de sua {\it deque} local ou de outra {\it deque} e, durante a coleta, enfila todas as refer√™ncias deste objeto em sua pr√≥pria {\it deque} e assim por diante.
 
-Como exemplo, os autores citam a aplicaÁ„o deste algoritmo a uma ·rvore bin·ria: uma das \textit{threads} efetuar· a varredura e coleta do nodo raiz, enfilar ambos nodos filhos e desenfilar de sua {\it deque} local um dos filhos. O outro nodo filho estar· disponÌvel para ser ``roubado'' por uma outra thread. Deste modo, para uma ·rvore de tamanho consider·vel, a carga estar· balanceada entre as {\it threads}.
+Como exemplo, os autores citam a aplica√ß√£o deste algoritmo a uma √°rvore bin√°ria: uma das \textit{threads} efetuar√° a varredura e coleta do nodo raiz, enfilar ambos nodos filhos e desenfilar de sua {\it deque} local um dos filhos. O outro nodo filho estar√° dispon√≠vel para ser ``roubado'' por uma outra thread. Deste modo, para uma √°rvore de tamanho consider√°vel, a carga estar√° balanceada entre as {\it threads}.
 
 
-\section{ImplementaÁ„o da coleta de cÛpia paralela} \label{sec:parcopy}
-Neste projeto pretende-se paralelizar a estratÈgia de cÛpia de dois espaÁos, visto que esta pode apresentar resultados mais rapidamente; e tambÈm por ser aplicada em outras estratÈgias de coleta, como a de geraÁıes.%TALK MORE?
+\section{Implementa√ß√£o da coleta de c√≥pia paralela} \label{sec:parcopy}
+Neste projeto pretende-se paralelizar a estrat√©gia de c√≥pia de dois espa√ßos, visto que esta pode apresentar resultados mais rapidamente; e tamb√©m por ser aplicada em outras estrat√©gias de coleta, como a de gera√ß√µes.%TALK MORE?
 
-Quando o sistema de execuÁ„o da {\tt pFun} solicita coleta de lixo, d·-se inÌcio ao processo de distribuiÁ„o dos $r$ objetos-raiz entre as $n$ {\it deques}. ApÛs, as $n$ {\it threads} iniciam a execuÁ„o da rotina mostrada no Programa \ref{src:parcol}. O primeiro passo È utilizar o argumento {\tt info} para descobrir qual das $n$ {\it deques} corresponde ‡ {\it thread} em execuÁ„o (linhas 4 e 5). A vari·vel ponteiro {\tt task} È respons·vel por referenciar o objeto que deve ser coletado no corrente momento (linhas 13 e 15). A rotina {\tt par\_evacuate} da linha 16 efetua a cÛpia do objeto para a regi„o inativa, retornando o novo endereÁo do objeto copiado.
+Quando o sistema de execu√ß√£o da {\tt pFun} solicita coleta de lixo, d√°-se in√≠cio ao processo de distribui√ß√£o dos $r$ objetos-raiz entre as $n$ {\it deques}. Ap√≥s, as $n$ {\it threads} iniciam a execu√ß√£o da rotina mostrada no Programa \ref{src:parcol}. O primeiro passo √© utilizar o argumento {\tt info} para descobrir qual das $n$ {\it deques} corresponde √† {\it thread} em execu√ß√£o (linhas 4 e 5). A vari√°vel ponteiro {\tt task} √© respons√°vel por referenciar o objeto que deve ser coletado no corrente momento (linhas 13 e 15). A rotina {\tt par\_evacuate} da linha 16 efetua a c√≥pia do objeto para a regi√£o inativa, retornando o novo endere√ßo do objeto copiado.
 
 \lstinputlisting[language=C, label=src:parcol,
-								 caption=Rotina simplificada de execuÁ„o das {\it threads}.]
+								 caption=Rotina simplificada de execu√ß√£o das {\it threads}.]
 								 {codes/par_collect.c}
 
-A repetiÁ„o das linhas 11 a 17 executa atÈ que {\tt deq} fique sem objetos para coletar, ent„o a linha 19 executa uma rotina de busca por algum ponteiro (objeto a ser coletado) de outra {\it deque}. Se encontrado, o novo ponteiro È armazenado em {\tt task} e enfilado na {\it deque} correspondente, e a execuÁ„o do programa volta para a linha 11. No caso de {\tt steal\_some\_work()} n„o conseguir ``roubar'' uma tarefa, este retornar· o ponteiro nulo, sinalizando que a {\it thread} corrente deve terminar sua execuÁ„o.
+A repeti√ß√£o das linhas 11 a 17 executa at√© que {\tt deq} fique sem objetos para coletar, ent√£o a linha 19 executa uma rotina de busca por algum ponteiro (objeto a ser coletado) de outra {\it deque}. Se encontrado, o novo ponteiro √© armazenado em {\tt task} e enfilado na {\it deque} correspondente, e a execu√ß√£o do programa volta para a linha 11. No caso de {\tt steal\_some\_work()} n√£o conseguir ``roubar'' uma tarefa, este retornar√° o ponteiro nulo, sinalizando que a {\it thread} corrente deve terminar sua execu√ß√£o.
 
 
-\subsection{CÛpia dos objetos vivos}
-A cÛpia dos objetos sobreviventes para a regi„o de destino È feita pela rotina {\tt par\_evacuate()}, de acordo com o Programa \ref{src:parevac}, onde a vari·vel {\tt heapcell} referencia o objeto a ser copiado. Existem dois tipos de objetos: objetos apenas com dados, como valores numÈricos e objetos de controle do programa, representados pelo tipo {\tt SimpleObject}; e objetos com dados e referÍncias a outros objetos, estes podem ser listas, funÁıes, etc., que s„o representados pelo tipo {\tt PointerObject}.
+\subsection{C√≥pia dos objetos vivos}
+A c√≥pia dos objetos sobreviventes para a regi√£o de destino √© feita pela rotina {\tt par\_evacuate()}, de acordo com o Programa \ref{src:parevac}, onde a vari√°vel {\tt heapcell} referencia o objeto a ser copiado. Existem dois tipos de objetos: objetos apenas com dados, como valores num√©ricos e objetos de controle do programa, representados pelo tipo {\tt SimpleObject}; e objetos com dados e refer√™ncias a outros objetos, estes podem ser listas, fun√ß√µes, etc., que s√£o representados pelo tipo {\tt PointerObject}.
 
-O primeiro passo È descobrir qual È o objeto referenciado pela vari·vel {\tt heapcell}, para tal, basta acessar o primeiro elemento do objeto (linha 2). Em ambos casos, deve-se alocar um novo espaÁo correspondente ao objeto a ser coletado na regi„o de destino: {\tt SimpleObject} usa a rotina {\tt vmsizeof()}, que calcula o tamanho do objeto na {\it heap}. Entretanto, {\tt PointerObject} deve utilizar outra rotina, {\tt objsize()}, que acrescenta o n˙mero de referÍncias no c·lculo do tamanho.
+O primeiro passo √© descobrir qual √© o objeto referenciado pela vari√°vel {\tt heapcell}, para tal, basta acessar o primeiro elemento do objeto (linha 2). Em ambos casos, deve-se alocar um novo espa√ßo correspondente ao objeto a ser coletado na regi√£o de destino: {\tt SimpleObject} usa a rotina {\tt vmsizeof()}, que calcula o tamanho do objeto na {\it heap}. Entretanto, {\tt PointerObject} deve utilizar outra rotina, {\tt objsize()}, que acrescenta o n√∫mero de refer√™ncias no c√°lculo do tamanho.
 
 \lstinputlisting[language=C, label=src:parevac,
 								 caption=Rotina simplificada de coleta paralela.]
 								 {codes/par_evacuate.c}
 
-Os testes das linhas 6 e 12 verificam se o objeto a ser coletado j· foi copiado. Se for o caso, a rotina de alocaÁ„o paralela (Programa \ref{src:paralloc}) retorna um ponteiro nulo, ent„o deve-se retornar o endereÁo do objeto; caso contr·rio, deve-se copiar o conte˙do do objeto no espaÁo de origem para o novo endereÁo na regi„o de destino (linhas 7 e 13). A operaÁ„o para um {\tt SimpleObject} est· completa e seu endereÁo È retornado na linha 8. J· para um {\tt PointerObject} deve-se posicionar {\tt pobj->pointers} no endereÁo de memÛria imediatamente posterior ao ˙ltimo elemento da estrutura de dados referenciada por {\tt pobj} (linha 15), ent„o, copia-se o conte˙do de cada ponteiro para a nova posiÁ„o correspondente na regi„o de destino, colocando-os na {\it deque} local para serem coletados nos prÛximos instantes. Por fim, a linha 21 retorna uma referÍncia a nova posiÁ„o de memÛria correspondente ao objeto que acabou de ser copiado.
+Os testes das linhas 6 e 12 verificam se o objeto a ser coletado j√° foi copiado. Se for o caso, a rotina de aloca√ß√£o paralela (Programa \ref{src:paralloc}) retorna um ponteiro nulo, ent√£o deve-se retornar o endere√ßo do objeto; caso contr√°rio, deve-se copiar o conte√∫do do objeto no espa√ßo de origem para o novo endere√ßo na regi√£o de destino (linhas 7 e 13). A opera√ß√£o para um {\tt SimpleObject} est√° completa e seu endere√ßo √© retornado na linha 8. J√° para um {\tt PointerObject} deve-se posicionar {\tt pobj->pointers} no endere√ßo de mem√≥ria imediatamente posterior ao √∫ltimo elemento da estrutura de dados referenciada por {\tt pobj} (linha 15), ent√£o, copia-se o conte√∫do de cada ponteiro para a nova posi√ß√£o correspondente na regi√£o de destino, colocando-os na {\it deque} local para serem coletados nos pr√≥ximos instantes. Por fim, a linha 21 retorna uma refer√™ncia a nova posi√ß√£o de mem√≥ria correspondente ao objeto que acabou de ser copiado.
 
 \subsection{\textit{Local Allocation Buffers}} \label{sec:lab}
-Na coleta de lixo paralela, v·rias {\it threads} podem alocar objetos na regi„o de destino ao mesmo tempo. Christine Flood e David Detlefs \cite{bib:flood:pargc} comentam que manter apenas uma vari·vel indicativa de topo na regi„o de destino resultaria em muitas condiÁıes de corrida, visto que pequenos objetos s„o alocados com muita frequÍncia por v·rias {\it threads}. Para evitar o excesso de sincronizaÁıes, este projeto adotou os chamados {\it Local Allocation Buffers} (LABs), onde cada {\it thread} aloca uma porÁ„o da regi„o de destino ({\it buffer}) com tamanho consider·vel, podendo alocar objetos com acesso exclusivo ‡quela porÁ„o, sem necessidade de sincronizaÁ„o. Os LABs devem ser grandes o bastante para evitar contenÁıes por excesso de sincronizaÁ„o de {\it threads}, mas suficientemente pequenos para minimizar fragmentaÁıes.
+Na coleta de lixo paralela, v√°rias {\it threads} podem alocar objetos na regi√£o de destino ao mesmo tempo. Christine Flood e David Detlefs \cite{bib:flood:pargc} comentam que manter apenas uma vari√°vel indicativa de topo na regi√£o de destino resultaria em muitas condi√ß√µes de corrida, visto que pequenos objetos s√£o alocados com muita frequ√™ncia por v√°rias {\it threads}. Para evitar o excesso de sincroniza√ß√µes, este projeto adotou os chamados {\it Local Allocation Buffers} (LABs), onde cada {\it thread} aloca uma por√ß√£o da regi√£o de destino ({\it buffer}) com tamanho consider√°vel, podendo alocar objetos com acesso exclusivo √†quela por√ß√£o, sem necessidade de sincroniza√ß√£o. Os LABs devem ser grandes o bastante para evitar conten√ß√µes por excesso de sincroniza√ß√£o de {\it threads}, mas suficientemente pequenos para minimizar fragmenta√ß√µes.
 
-Um LAB È alocado utilizando {\it mutexes}, como mostra o Programa \ref{src:LAB}. Primeiramente, o {\it mutex} correspondente ao LAB È trancado, garantindo assim, acesso exclusivo ‡ vari·vel compartilhada {\tt LAB\_tstop}, que referencia a posiÁ„o de inÌcio do prÛximo LAB na {\it heap}. ApÛs, {\tt LAB\_tstop} È copiado para uma vari·vel auxiliar e incrementado de acordo com o indicado por {\tt size}. Ao fim, o {\it mutex} È liberado e a rotina de alocaÁ„o retorna ‡ posiÁ„o de inÌcio do LAB recÈm alocado.
+Um LAB √© alocado utilizando {\it mutexes}, como mostra o Programa \ref{src:LAB}. Primeiramente, o {\it mutex} correspondente ao LAB √© trancado, garantindo assim, acesso exclusivo √† vari√°vel compartilhada {\tt LAB\_tstop}, que referencia a posi√ß√£o de in√≠cio do pr√≥ximo LAB na {\it heap}. Ap√≥s, {\tt LAB\_tstop} √© copiado para uma vari√°vel auxiliar e incrementado de acordo com o indicado por {\tt size}. Ao fim, o {\it mutex} √© liberado e a rotina de aloca√ß√£o retorna √† posi√ß√£o de in√≠cio do LAB rec√©m alocado.
 
 \lstinputlisting[language=C, label=src:LAB,
-								 caption=AlocaÁ„o de um LAB.]
+								 caption=Aloca√ß√£o de um LAB.]
 								 {codes/allocLAB.c}
 
-\subsection{UtilizaÁ„o da instruÁ„o CAS} \label{sec:cas}
-O programa \ref{src:paralloc} mostra a rotina de alocaÁ„o paralela nos LABs utilizando CAS. Nesta rotina, a vari·vel {\tt me} identifica a {\it thread} correspondente ‡ alocaÁ„o. A linha 4 verifica se o LAB em utilizaÁ„o j· foi preenchido e, se necess·rio, outro LAB È alocado. A instruÁ„o CAS È utilizada na linha 7 para evitar que um objeto, referenciado pela vari·vel {\tt oldloc}, n„o seja copiado mais de uma vez. Se {\tt oldloc} j· estiver na tabela de objetos copiados (vari·vel ponteiro {\tt forwarding}), o teste da linha 8 ser· verdadeiro, interrompendo a alocaÁ„o; caso contr·rio, CAS copia o valor de {\tt labtop[me]} para a tabela de objetos copiados correspondente ‡ {\tt oldloc} e procede a alocaÁ„o do espaÁo para este objeto no LAB (linhas 10 e 11), retornando a porÁ„o recÈm alocada (linha 13).
+\subsection{Utiliza√ß√£o da instru√ß√£o CAS} \label{sec:cas}
+O programa \ref{src:paralloc} mostra a rotina de aloca√ß√£o paralela nos LABs utilizando CAS. Nesta rotina, a vari√°vel {\tt me} identifica a {\it thread} correspondente √† aloca√ß√£o. A linha 4 verifica se o LAB em utiliza√ß√£o j√° foi preenchido e, se necess√°rio, outro LAB √© alocado. A instru√ß√£o CAS √© utilizada na linha 7 para evitar que um objeto, referenciado pela vari√°vel {\tt oldloc}, n√£o seja copiado mais de uma vez. Se {\tt oldloc} j√° estiver na tabela de objetos copiados (vari√°vel ponteiro {\tt forwarding}), o teste da linha 8 ser√° verdadeiro, interrompendo a aloca√ß√£o; caso contr√°rio, CAS copia o valor de {\tt labtop[me]} para a tabela de objetos copiados correspondente √† {\tt oldloc} e procede a aloca√ß√£o do espa√ßo para este objeto no LAB (linhas 10 e 11), retornando a por√ß√£o rec√©m alocada (linha 13).
 
 
 \lstinputlisting[language=C, label=src:paralloc,
-								 caption=Rotina de alocaÁ„o paralela.]
+								 caption=Rotina de aloca√ß√£o paralela.]
 								 {codes/par_alloc.c}
 
 
-A Figura \ref{fig:cas1} exemplifica o caso em que duas {\it threads} referenciam o mesmo objeto na regi„o de origem (um inteiro), atravÈs de outros objetos (uma lista e uma funÁ„o) j· coletados. Apenas uma cÛpia deste inteiro pode consolidar-se. A instruÁ„o CAS È utilizada justamente para evitar que este objeto, duplamente referenciado, n„o seja copiado mais de uma vez. A outra referÍncia deve ser atualizada para a nova posiÁ„o do inteiro na regi„o de destino, como mostra a Figura \ref{fig:cas2}, onde existe apenas uma cÛpia do objeto em quest„o, e tanto a lista quanto a funÁ„o referenciam esta mesma cÛpia.
+A Figura \ref{fig:cas1} exemplifica o caso em que duas {\it threads} referenciam o mesmo objeto na regi√£o de origem (um inteiro), atrav√©s de outros objetos (uma lista e uma fun√ß√£o) j√° coletados. Apenas uma c√≥pia deste inteiro pode consolidar-se. A instru√ß√£o CAS √© utilizada justamente para evitar que este objeto, duplamente referenciado, n√£o seja copiado mais de uma vez. A outra refer√™ncia deve ser atualizada para a nova posi√ß√£o do inteiro na regi√£o de destino, como mostra a Figura \ref{fig:cas2}, onde existe apenas uma c√≥pia do objeto em quest√£o, e tanto a lista quanto a fun√ß√£o referenciam esta mesma c√≥pia.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{images/CAS1.png}
-\caption{Duas {\it threads} referenciam o mesmo objeto ainda n„o coletado.}
+\caption{Duas {\it threads} referenciam o mesmo objeto ainda n√£o coletado.}
 \label{fig:cas1}
 \end{figure}
 
-Se o inteiro j· estiver na tabela de objetos copiados, n„o ocorrer· alocaÁ„o, apenas atualizaÁ„o da referÍncia; caso contr·rio, CAS insere o novo endereÁo do objeto na posiÁ„o correspondente da tabela de objetos copiados, procedendo a alocaÁ„o do espaÁo para este objeto no LAB.
+Se o inteiro j√° estiver na tabela de objetos copiados, n√£o ocorrer√° aloca√ß√£o, apenas atualiza√ß√£o da refer√™ncia; caso contr√°rio, CAS insere o novo endere√ßo do objeto na posi√ß√£o correspondente da tabela de objetos copiados, procedendo a aloca√ß√£o do espa√ßo para este objeto no LAB.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{images/CAS2.png}
-\caption{CÛpia do objeto e atualizaÁ„o das referÍcnias utilizando CAS.}
+\caption{C√≥pia do objeto e atualiza√ß√£o das refer√™cnias utilizando CAS.}
 \label{fig:cas2}
 \end{figure}
 
-%Para auxiliar no processo, mantÈm-se uma tabela de objetos copiados, representada pela vari·vel ponteiro {\tt forwarding}, que È respons·vel por armazenar o novo endereÁo de um objeto da regi„o de origem que foi copiado para a regi„o de destino.
+%Para auxiliar no processo, mant√©m-se uma tabela de objetos copiados, representada pela vari√°vel ponteiro {\tt forwarding}, que √© respons√°vel por armazenar o novo endere√ßo de um objeto da regi√£o de origem que foi copiado para a regi√£o de destino.
 
-\chapter{Conclusıes} \label{sec:finalizing}
-%Conclui-se que a conclus„o È importante para concluir o trabalho.
-Linguagens funcionais tem sido muito utilizadas em meios acadÍmicos, mas algumas delas est„o cada vez mais sendo empregadas em sistemas comerciais modernos, como {\tt Erlang}, {\tt OCaml}, e {\tt Haskell}. Estas linguagens exigem que seu sistema de execuÁ„o possua gerÍncia autom·tica de memÛria, de forma a facilitar a definiÁ„o das construÁıes de alto nÌvel que a linguagem oferece.
+\chapter{Conclus√µes} \label{sec:finalizing}
+%Conclui-se que a conclus√£o √© importante para concluir o trabalho.
+Linguagens funcionais tem sido muito utilizadas em meios acad√™micos, mas algumas delas est√£o cada vez mais sendo empregadas em sistemas comerciais modernos, como {\tt Erlang}, {\tt OCaml}, e {\tt Haskell}. Estas linguagens exigem que seu sistema de execu√ß√£o possua ger√™ncia autom√°tica de mem√≥ria, de forma a facilitar a defini√ß√£o das constru√ß√µes de alto n√≠vel que a linguagem oferece.
 
-Arquiteturas multicore est„o cada vez mais populares, fazendo com que cada vez mais usu·rios disponham de, ao menos, dois n˙cleos de processamento em seus computadores pessoais. Por isso, tornam-se importante pesquisas e desenvolvimento de aplicaÁıes que faÁam uso desse poder computacional. %Este trabalho vem a contribuir neste aspecto: aproveitar a disponibilidade de computaÁ„o -- mais n˙cleos de processameto disponÌveis -- para melhorar o desempenho de programas escritos em {\tt pFun}.
+Arquiteturas multicore est√£o cada vez mais populares, fazendo com que cada vez mais usu√°rios disponham de, ao menos, dois n√∫cleos de processamento em seus computadores pessoais. Por isso, tornam-se importante pesquisas e desenvolvimento de aplica√ß√µes que fa√ßam uso desse poder computacional. %Este trabalho vem a contribuir neste aspecto: aproveitar a disponibilidade de computa√ß√£o -- mais n√∫cleos de processameto dispon√≠veis -- para melhorar o desempenho de programas escritos em {\tt pFun}.
 
-O presente projeto apresentou uma estrutura para coleta de lixo paralela -- a coleta de cÛpia de dois espaÁos -- para uma linguagem funcional pura. Embora n„o tenha obtido ganhos de desempenho, o projeto contribui ao verificar as dificuldades e limites gerados pela programaÁ„o {\it multi-thread} em processadores multicore. As prÛximas seÁıes discutem os resultados obtidos e algumas consideraÁıes a respeito do desempenho desta implementaÁ„o. % da implementaÁ„o paralela da coleta de lixo. %... WHAT A MESS!
+O presente projeto apresentou uma estrutura para coleta de lixo paralela -- a coleta de c√≥pia de dois espa√ßos -- para uma linguagem funcional pura. Embora n√£o tenha obtido ganhos de desempenho, o projeto contribui ao verificar as dificuldades e limites gerados pela programa√ß√£o {\it multi-thread} em processadores multicore. As pr√≥ximas se√ß√µes discutem os resultados obtidos e algumas considera√ß√µes a respeito do desempenho desta implementa√ß√£o. % da implementa√ß√£o paralela da coleta de lixo. %... WHAT A MESS!
 
 \section{Resultados obtidos}
-Foram realizados testes de desempenho da m·quina virtual {\tt pfun} com a coleta de lixo paralela para dois programas: {\tt pmaze} e {\tt hanoi} \cite{bib:beloni}. Nestes testes, mostrados nas Tabelas \ref{tab:res} e \ref{tab:res2}, trÍs tempos de execuÁ„o s„o levados em consideraÁ„o: o tempo real, referente ao tempo de execuÁ„o do programa; o tempo total, que È a soma dos tempos de ocupaÁ„o de processadores por parte de cada programa; e o tempo aproximado de ocupaÁ„o dos processadores somados nos perÌodo de realizaÁ„o das coletas de lixo.
+Foram realizados testes de desempenho da m√°quina virtual {\tt pfun} com a coleta de lixo paralela para dois programas: {\tt pmaze} e {\tt hanoi} \cite{bib:beloni}. Nestes testes, mostrados nas Tabelas \ref{tab:res} e \ref{tab:res2}, tr√™s tempos de execu√ß√£o s√£o levados em considera√ß√£o: o tempo real, referente ao tempo de execu√ß√£o do programa; o tempo total, que √© a soma dos tempos de ocupa√ß√£o de processadores por parte de cada programa; e o tempo aproximado de ocupa√ß√£o dos processadores somados nos per√≠odo de realiza√ß√£o das coletas de lixo.
 
-TambÈm foi verificado o desempenho da coleta de lixo sequencial, apresentada na seÁ„o \ref{sec:twospace}, que produziu melhores resultados que a coleta de lixo paralela: $14m$ para o programa {\tt pmaze} e $169m 30s$ para o programa {\tt hanoi}, sendo cerca de $1m 50s$ e $1m$ gastos com coleta de lixo, respectivamente.
+Tamb√©m foi verificado o desempenho da coleta de lixo sequencial, apresentada na se√ß√£o \ref{sec:twospace}, que produziu melhores resultados que a coleta de lixo paralela: $14m$ para o programa {\tt pmaze} e $169m 30s$ para o programa {\tt hanoi}, sendo cerca de $1m 50s$ e $1m$ gastos com coleta de lixo, respectivamente.
 
 \begin{table}[h]
 \centering
@@ -749,7 +749,7 @@ TambÈm foi verificado o desempenho da coleta de lixo sequencial, apresentada na 
 	8							& 24m 11s		& 96m 14s 	& 85m \\
 	\hline
 	\end{tabular}
-\caption{Tempos de execuÁ„o do programa {\tt pmaze} com coleta de lixo paralela.}
+\caption{Tempos de execu√ß√£o do programa {\tt pmaze} com coleta de lixo paralela.}
 \label{tab:res}
 \end{table}
 
@@ -770,38 +770,38 @@ TambÈm foi verificado o desempenho da coleta de lixo sequencial, apresentada na 
 	8							& 196m 36s	& 231m 3s 	& 63m \\
 	\hline
 	\end{tabular}
-\caption{Tempos de execuÁ„o do programa {\tt hanoi} com coleta de lixo paralela.}
+\caption{Tempos de execu√ß√£o do programa {\tt hanoi} com coleta de lixo paralela.}
 \label{tab:res2}
 \end{table}
 
-Os testes apontam que, aumentando o n˙mero de processadores, o tempo real de execuÁ„o È acrescido de poucos minutos, entretanto, o tempo somado de execuÁ„o do programa nas CPUs tem um acrÈscimo consider·vel.
+Os testes apontam que, aumentando o n√∫mero de processadores, o tempo real de execu√ß√£o √© acrescido de poucos minutos, entretanto, o tempo somado de execu√ß√£o do programa nas CPUs tem um acr√©scimo consider√°vel.
 
-Percebe-se que os tempos de espera se agravam com o aumento do n˙mero de processadores: quanto mais processadores, mais pausas e maior o tempo de espera na coleta de lixo. Observou-se tambÈm que, ao subtrair o tempo gasto com coleta de lixo do tempo total de execuÁ„o, para ambos programas, o resultado È um tempo muito prÛximo ao tempo de execuÁ„o produzido pela coleta de cÛpia sequencial, ou seja, a coleta de lixo paralela est· realmente gerando um gargalo. O programa {\tt pmaze} apresenta n˙meros ainda mais discrepantes, visto que este possui maior residÍncia na {\it heap}. As prÛximas subseÁıes discorrem as possÌveis causas deste comportamento.
+Percebe-se que os tempos de espera se agravam com o aumento do n√∫mero de processadores: quanto mais processadores, mais pausas e maior o tempo de espera na coleta de lixo. Observou-se tamb√©m que, ao subtrair o tempo gasto com coleta de lixo do tempo total de execu√ß√£o, para ambos programas, o resultado √© um tempo muito pr√≥ximo ao tempo de execu√ß√£o produzido pela coleta de c√≥pia sequencial, ou seja, a coleta de lixo paralela est√° realmente gerando um gargalo. O programa {\tt pmaze} apresenta n√∫meros ainda mais discrepantes, visto que este possui maior resid√™ncia na {\it heap}. As pr√≥ximas subse√ß√µes discorrem as poss√≠veis causas deste comportamento.
 
-%, basta ver os resultados dos testes, o tempo do usu·rio È a soma dos tempos de todas as CPU!!!
-%Percebe-se que um dos fatores que contribui para isto È a implementaÁ„o das {\it deques}, que possui exclus„o m˙tua em todas operaÁıes para evitar as condiÁıes de corrida, portanto, sempre que alguma {\it thread} ficar sem objetos para coletar, poder„o ocorrer v·rias situaÁıes de exclus„o m˙tua, que se agravam com o aumento do n˙mero de processadores: quanto mais processadores, mais pausas e maior o tempo de espera na coleta de lixo, basta ver os resultados dos testes, o tempo do usu·rio È a soma dos tempos de todas as CPU!!!
+%, basta ver os resultados dos testes, o tempo do usu√°rio √© a soma dos tempos de todas as CPU!!!
+%Percebe-se que um dos fatores que contribui para isto √© a implementa√ß√£o das {\it deques}, que possui exclus√£o m√∫tua em todas opera√ß√µes para evitar as condi√ß√µes de corrida, portanto, sempre que alguma {\it thread} ficar sem objetos para coletar, poder√£o ocorrer v√°rias situa√ß√µes de exclus√£o m√∫tua, que se agravam com o aumento do n√∫mero de processadores: quanto mais processadores, mais pausas e maior o tempo de espera na coleta de lixo, basta ver os resultados dos testes, o tempo do usu√°rio √© a soma dos tempos de todas as CPU!!!
 
 
-\subsection{Quanto aos \textit{overheads} da implementaÁ„o proposta}
-%Durante o desenvolvimento deste, utilizou-se a tÈcnica de {\it overpartition} apresentada na seÁ„o \ref{sec:overp} que, apesar de balancear a carga entre as {\it threads} de maneira satisfatÛria, demostrou-se mais adequada para tarefas com alta granulosidade (tarefas maiores). Sabe-se que o processo de enfilar e desenfilar referÍncias a objetos na {\it heap} ocorre com muita frequÍncia, adicionando um {\it overhead} consider·vel, j· que, muitas vezes, o tamanho dos objetos copiados È muito pequeno para que valham a pena tantas operaÁıes. %de enfilar e desenfilar.
-Durante o desenvolvimento deste projeto, utilizou-se a tÈcnica de {\it overpartition} apresentada na seÁ„o \ref{sec:overp}. Esta tÈcnica efetivamente garante o balanceamento da carga entre as v·rias {\it threads}, entretanto, o processo de enfilar e desenfilar referÍncias a objetos nas {\it deques} ocorre com muita frequÍncia (Programas \ref{src:parcol} e \ref{src:parevac}), adicionando um {\it overhead} consider·vel, j· que, muitas vezes, o tamanho dos objetos copiados È muito pequeno para que valham a pena tantas operaÁıes.
+\subsection{Quanto aos \textit{overheads} da implementa√ß√£o proposta}
+%Durante o desenvolvimento deste, utilizou-se a t√©cnica de {\it overpartition} apresentada na se√ß√£o \ref{sec:overp} que, apesar de balancear a carga entre as {\it threads} de maneira satisfat√≥ria, demostrou-se mais adequada para tarefas com alta granulosidade (tarefas maiores). Sabe-se que o processo de enfilar e desenfilar refer√™ncias a objetos na {\it heap} ocorre com muita frequ√™ncia, adicionando um {\it overhead} consider√°vel, j√° que, muitas vezes, o tamanho dos objetos copiados √© muito pequeno para que valham a pena tantas opera√ß√µes. %de enfilar e desenfilar.
+Durante o desenvolvimento deste projeto, utilizou-se a t√©cnica de {\it overpartition} apresentada na se√ß√£o \ref{sec:overp}. Esta t√©cnica efetivamente garante o balanceamento da carga entre as v√°rias {\it threads}, entretanto, o processo de enfilar e desenfilar refer√™ncias a objetos nas {\it deques} ocorre com muita frequ√™ncia (Programas \ref{src:parcol} e \ref{src:parevac}), adicionando um {\it overhead} consider√°vel, j√° que, muitas vezes, o tamanho dos objetos copiados √© muito pequeno para que valham a pena tantas opera√ß√µes.
 
-%Outro fator que pode justificar a lentid„o do coletor de cÛpia paralela È a
-A proposta original de Arora \cite{bib:arora:worksteal} È uma implementaÁ„o das {\it deques} com {\it work-stealing} n„o bloqueante, utilizando a instruÁ„o CAS. Todavia, a implementaÁ„o das {\it deques} adotada neste projeto (seÁ„o \ref{sec:worksteal}) È muito mais simples, pois est· preparada para lidar com as colisıes de {\it threads} usando exclus„o m˙tua. Cada operaÁ„o sobre as {\it deques} È limimtada por {\it mutexes}, desta maneira, uma situaÁ„o que exigir {\it work-stealing} faz com que apenas uma {\it thread} tenha acesso ‡ {\it deque}, bloqueando as outras {\it threads}.
-%, desde o teste se a {\it deque} contÈm elementos atÈ o retorno da refrÍncia È feito sob {\it mutexes}, contribuindo para o fraco desempenho desta proposta.
+%Outro fator que pode justificar a lentid√£o do coletor de c√≥pia paralela √© a
+A proposta original de Arora \cite{bib:arora:worksteal} √© uma implementa√ß√£o das {\it deques} com {\it work-stealing} n√£o bloqueante, utilizando a instru√ß√£o CAS. Todavia, a implementa√ß√£o das {\it deques} adotada neste projeto (se√ß√£o \ref{sec:worksteal}) √© muito mais simples, pois est√° preparada para lidar com as colis√µes de {\it threads} usando exclus√£o m√∫tua. Cada opera√ß√£o sobre as {\it deques} √© limimtada por {\it mutexes}, desta maneira, uma situa√ß√£o que exigir {\it work-stealing} faz com que apenas uma {\it thread} tenha acesso √† {\it deque}, bloqueando as outras {\it threads}.
+%, desde o teste se a {\it deque} cont√©m elementos at√© o retorno da refr√™ncia √© feito sob {\it mutexes}, contribuindo para o fraco desempenho desta proposta.
 
-Sempre que uma {\it thread (A)} tentar roubar algum elemento de outra {\it deque}, perde-se muito tempo. Primeiramente, {\it (A)} deve testar o {\it mutex} da {\it deque} vÌtima, que provavelmente estar· na cache de outro processador, correspondente ‡ {\it thread} dona da vÌtima devido a frequÍncia de acessos, como comentado na seÁ„o \ref{sec:cache}. Se conseguir roubar o elemento, haver· um custo adicional no acesso aos elementos da {\it deque} vÌtima, alÈm de trancar o acesso desta {\it deque} para qualquer outra {\it thread} que tente acess·-la, inclusive para a {\it thread} correspondente ‡ vÌtima.
+Sempre que uma {\it thread (A)} tentar roubar algum elemento de outra {\it deque}, perde-se muito tempo. Primeiramente, {\it (A)} deve testar o {\it mutex} da {\it deque} v√≠tima, que provavelmente estar√° na cache de outro processador, correspondente √† {\it thread} dona da v√≠tima devido a frequ√™ncia de acessos, como comentado na se√ß√£o \ref{sec:cache}. Se conseguir roubar o elemento, haver√° um custo adicional no acesso aos elementos da {\it deque} v√≠tima, al√©m de trancar o acesso desta {\it deque} para qualquer outra {\it thread} que tente acess√°-la, inclusive para a {\it thread} correspondente √† v√≠tima.
 
-\subsection{Quanto ‡s arquiteturas multicore}
-As limitaÁıes impostas pelo {\it hardware} tambÈm devem ser consideradas. Mesmo que uma arquitetura disponha de v·rios processadores, se estes n„o puderem acessar a memÛria literalmente ao mesmo tempo, por meio de barramentos separados, o ganho de desempenho ser· muito prejudicado. No caso da coleta de lixo, em que a memÛria È constantemente acessada ({\it heap}), certamente ocorrem casos de processadores esperando por outros, alÈm de problemas de coerÍncia de cache apresentados na seÁ„o \ref{sec:cache}.
+\subsection{Quanto √†s arquiteturas multicore}
+As limita√ß√µes impostas pelo {\it hardware} tamb√©m devem ser consideradas. Mesmo que uma arquitetura disponha de v√°rios processadores, se estes n√£o puderem acessar a mem√≥ria literalmente ao mesmo tempo, por meio de barramentos separados, o ganho de desempenho ser√° muito prejudicado. No caso da coleta de lixo, em que a mem√≥ria √© constantemente acessada ({\it heap}), certamente ocorrem casos de processadores esperando por outros, al√©m de problemas de coer√™ncia de cache apresentados na se√ß√£o \ref{sec:cache}.
 %Access to RAM is serialized; this and cache coherency issues causes performance to lag slightly behind the number of additional processors in the system.
 
-\section{ContinuaÁ„o do trabalho}
-A implementaÁ„o da estrutura {\it deques} com certeza merece mais atenÁ„o, visando torn·-la menos bloqueante e mais pr·tica, seguindo a proposta de \cite{bib:arora:worksteal}, onde a instruÁ„o CAS È utilizada nos mÈtodos {\tt pop}, em vez de exclus„o m˙tua. % para manter a estrutura segura quanto ‡s {\it threads}.
+\section{Continua√ß√£o do trabalho}
+A implementa√ß√£o da estrutura {\it deques} com certeza merece mais aten√ß√£o, visando torn√°-la menos bloqueante e mais pr√°tica, seguindo a proposta de \cite{bib:arora:worksteal}, onde a instru√ß√£o CAS √© utilizada nos m√©todos {\tt pop}, em vez de exclus√£o m√∫tua. % para manter a estrutura segura quanto √†s {\it threads}.
 
-TambÈm pode-se adotar a modificaÁ„o efetuada por \cite{bib:flood:pargc}, em que as {\it deques} possuem um esquema para gerenciamento de {\it overflow}. Neste esquema, cada {\it deque} possui uma capacidade fixa; quando n„o h· mais espaÁo, o mÈtodo {\tt pop\_bottom} move uma porÁ„o dos elementos da {\it deque} correspondente para um {\it overflow set} global, liberando espaÁo para novas inserÁıes. Outra possibilidade È a implementaÁ„o das {\it deques} como uma lista encadeada de {\it arrays}, assim quando um array estiver lotado, um novo ser· alocado.
+Tamb√©m pode-se adotar a modifica√ß√£o efetuada por \cite{bib:flood:pargc}, em que as {\it deques} possuem um esquema para gerenciamento de {\it overflow}. Neste esquema, cada {\it deque} possui uma capacidade fixa; quando n√£o h√° mais espa√ßo, o m√©todo {\tt pop\_bottom} move uma por√ß√£o dos elementos da {\it deque} correspondente para um {\it overflow set} global, liberando espa√ßo para novas inser√ß√µes. Outra possibilidade √© a implementa√ß√£o das {\it deques} como uma lista encadeada de {\it arrays}, assim quando um array estiver lotado, um novo ser√° alocado.
 
-Os objetos alocados na {\it heap}, juntamente com suas referÍncias, podem ser vistos como um conjunto de grafos. Ent„o estudos sobre algoritmos paralelos de percurso em grafos, como em \cite{bib:bfs}, podem ser de grande valor para ajudar na melhora do desempenho da implementaÁ„o.
+Os objetos alocados na {\it heap}, juntamente com suas refer√™ncias, podem ser vistos como um conjunto de grafos. Ent√£o estudos sobre algoritmos paralelos de percurso em grafos, como em \cite{bib:bfs}, podem ser de grande valor para ajudar na melhora do desempenho da implementa√ß√£o.
 
 
 % Bibliografia
