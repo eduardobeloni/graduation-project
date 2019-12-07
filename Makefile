@@ -1,10 +1,9 @@
 FILE = mono
 
 all:
-	pdflatex $(FILE)
+	xelatex $(FILE)
 	bibtex $(FILE)
-	pdflatex $(FILE)
-	pdflatex $(FILE)
+	xelatex $(FILE)
 
 clean:
 	rm $(FILE).pdf $(FILE).aux  $(FILE).bbl -f
